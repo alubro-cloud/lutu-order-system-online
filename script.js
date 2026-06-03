@@ -1972,6 +1972,17 @@ window.selectUserMode = function (mode) {
         if (b2cTopbar) b2cTopbar.classList.add('hidden');
         if (b2bTopbar) b2bTopbar.classList.add('hidden');
         document.getElementById('info-topbar')?.classList.add('hidden');
+    } else if (mode === 'PRODUCTS') {
+        // [新增] 自家成品 — 暫時 placeholder，之後實作產品頁
+        // 為了不破壞既有流程，先彈一個訊息或進入 INFO 區塊
+        alert('「自家成品」頁面建置中，敬請期待 🛠️\n目前已有的標準品：ALUMIBRO 攤車');
+        // 重新顯示 hub 讓使用者選別的
+        const hub = document.getElementById('hub-overlay');
+        if (hub) {
+            hub.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        return;  // 不繼續執行後面的邏輯
     } else if (mode === 'INFO') {
         document.body.classList.remove('mode-custom');
         document.body.classList.add('mode-info');

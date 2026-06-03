@@ -395,72 +395,65 @@
             flex-shrink: 0;
         }
 
-        /* 首頁四卡片並排 (Desktop) */
+        /* 首頁卡片排版 (Desktop) — 一排 5 個橫向並排，整頁不超過 100vh */
         @media (min-width: 769px) {
-            .hub-cards { flex-wrap: nowrap !important; gap: 20px !important; }
-            .hub-card { width: 25% !important; min-width: 220px !important; max-width: 280px !important; padding: 30px 20px !important; }
-        }
-
-        /* 手機版 - 2x2 四宮格極簡版 */
-        @media (max-width: 768px) {
+            /* hub 容器：鎖死 100vh */
             .hub-container {
                 min-height: 100vh !important;
-                padding: 30px 20px !important;
-                gap: 24px !important;
+                max-height: 100vh !important;
+                padding: 22px 24px !important;
+                gap: 14px !important;
                 justify-content: space-between !important;
+                display: flex !important;
+                flex-direction: column !important;
+                overflow: hidden !important;
             }
             .hub-img-logo {
-                max-width: 260px !important;
-                width: 70% !important;
+                max-width: 190px !important;
+                flex-shrink: 0 !important;
             }
-
-            /* 強制改成 grid 2x2 */
             .hub-main {
                 display: flex !important;
                 align-items: center !important;
+                justify-content: center !important;
                 flex: 1 !important;
                 width: 100% !important;
-                max-width: 420px !important;
-                margin: 0 auto !important;
-            }
-            .hub-cards {
-                display: grid !important;
-                grid-template-columns: 1fr 1fr !important;
-                grid-template-rows: 1fr 1fr !important;
-                gap: 14px !important;
-                width: 100% !important;
-                max-width: 420px !important;
-                margin: 0 auto !important;
-                max-height: none !important;
-                overflow: visible !important;
-                flex: none !important;
-                aspect-ratio: 1 / 1 !important;
-            }
-
-            /* 卡片 */
-            .hub-card {
-                flex: none !important;
-                width: 100% !important;
-                height: 100% !important;
                 max-width: none !important;
-                min-width: 0 !important;
-                aspect-ratio: auto !important;
-                padding: 0 !important;
+                margin: 0 auto !important;
                 min-height: 0 !important;
-                max-height: none !important;
-                border-radius: 14px !important;
-                text-align: center !important;
             }
-            .hub-card-inner {
-                padding: 18px 12px !important;
-                gap: 0 !important;
-                justify-content: space-between !important;
-                align-items: center !important;
-                height: 100% !important;
+            /* 一排 5 個 */
+            .hub-cards {
+                display: flex !important;
+                flex-wrap: nowrap !important;
+                gap: 16px !important;
+                justify-content: center !important;
+                align-items: stretch !important;
                 width: 100% !important;
+            }
+            /* 五張卡片平均分配，左右滿版 */
+            .hub-card {
+                flex: 1 1 0 !important;
+                width: auto !important;
+                min-width: 0 !important;
+                max-width: none !important;
+                padding: 22px 18px !important;
+            }
+            .hub-card.hub-group-purchase {
+                order: 1 !important;
+            }
+            .hub-card.hub-group-service {
+                order: 2 !important;
+            }
+            
+            /* 卡片內部緊湊版 */
+            .hub-card .hub-card-inner {
+                padding: 0 !important;
+                gap: 8px !important;
+                height: 100% !important;
                 display: flex !important;
                 flex-direction: column !important;
-                text-align: center !important;
+                justify-content: space-between !important;
             }
             .hub-card-content {
                 flex: 1 !important;
@@ -468,71 +461,202 @@
                 flex-direction: column !important;
                 justify-content: center !important;
                 align-items: center !important;
-                width: 100% !important;
-                gap: 0 !important;
+                text-align: center !important;
+            }
+            .hub-card-content h3 {
+                font-size: 1.2rem !important;
+                margin-bottom: 6px !important;
+                letter-spacing: 1.5px !important;
+                text-align: center !important;
+            }
+            .hub-card-content p {
+                font-size: 0.74rem !important;
+                line-height: 1.45 !important;
+                letter-spacing: 0.3px !important;
+                margin: 0 !important;
                 text-align: center !important;
             }
             .hub-card-series-tag {
-                font-size: 10px !important;
-                padding: 3px 9px !important;
-                letter-spacing: 1px !important;
-                margin: 0 !important;
-                text-align: center !important;
+                font-size: 0.68rem !important;
+                padding: 3px 8px !important;
+                letter-spacing: 1.2px !important;
+                display: inline-block !important;
+                margin: 0 auto !important;
+            }
+            /* btn 改 inline 並縮小 */
+            .hub-btn {
+                position: static !important;
+                margin-top: 0 !important;
+                padding: 8px 0 0 !important;
+                font-size: 0.7rem !important;
+                letter-spacing: 1.5px !important;
+                bottom: auto !important;
+                left: auto !important;
+                right: auto !important;
+                justify-content: center !important;
+                gap: 6px !important;
+            }
+            
+            /* 社群區縮一點 */
+            .hub-social-links {
+                margin-top: 8px !important;
+                gap: 22px !important;
+                flex-shrink: 0 !important;
+            }
+            .hub-social-icon {
+                font-size: 22px !important;
+            }
+            .hub-footer {
+                margin-top: 0 !important;
+                flex-shrink: 0 !important;
+            }
+        }
+
+        /* 手機版 - 直排 5 卡片極簡版（不捲動，社群可見） */
+        @media (max-width: 768px) {
+            .hub-container {
+                min-height: 100vh !important;
+                padding: 14px 16px 12px !important;
+                gap: 10px !important;
+                justify-content: flex-start !important;
+            }
+            .hub-img-logo {
+                max-width: 180px !important;
+                width: 50% !important;
             }
 
-            /* 標題 - 統一覆蓋成 4 字精簡版 */
+            /* 改成直排 1 欄 5 個 */
+            .hub-main {
+                display: flex !important;
+                align-items: stretch !important;
+                flex: 1 !important;
+                width: 100% !important;
+                max-width: 420px !important;
+                margin: 0 auto !important;
+            }
+            .hub-cards {
+                display: flex !important;
+                flex-direction: column !important;
+                grid-template-columns: none !important;
+                grid-template-rows: none !important;
+                gap: 7px !important;
+                width: 100% !important;
+                max-width: 420px !important;
+                margin: 0 auto !important;
+                max-height: none !important;
+                overflow: visible !important;
+                flex: 1 !important;
+                aspect-ratio: auto !important;
+                justify-content: center !important;
+            }
+
+            /* 採購/服務分組視覺 — 用 order 排序，並插入小分隔 */
+            .hub-card.hub-group-purchase { order: 1; }
+            .hub-card.hub-group-service { order: 2; }
+
+            /* 卡片 — 直排扁版 */
+            .hub-card {
+                flex: none !important;
+                width: 100% !important;
+                height: auto !important;
+                max-width: none !important;
+                min-width: 0 !important;
+                aspect-ratio: auto !important;
+                padding: 0 !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                border-radius: 12px !important;
+                text-align: left !important;
+            }
+            .hub-card-inner {
+                padding: 11px 14px !important;
+                gap: 0 !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+                height: auto !important;
+                width: 100% !important;
+                display: flex !important;
+                flex-direction: row !important;
+                text-align: left !important;
+            }
+            .hub-card-content {
+                flex: 1 !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+                align-items: flex-start !important;
+                width: auto !important;
+                gap: 1px !important;
+                text-align: left !important;
+            }
+            .hub-card-series-tag {
+                font-size: 8.5px !important;
+                padding: 2px 7px !important;
+                letter-spacing: 1px !important;
+                margin: 0 8px 0 0 !important;
+                text-align: center !important;
+                flex-shrink: 0 !important;
+                align-self: center !important;
+            }
+
+            /* 標題 - 用實際 h3 內容（不要再 ::before 蓋掉了） */
             .hub-card h3,
             .hub-card-content h3 {
-                font-size: 0 !important;
-                line-height: 1 !important;
+                font-size: 14px !important;
+                line-height: 1.2 !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 font-weight: 500 !important;
-                width: 100% !important;
-                text-align: center !important;
-                letter-spacing: 0 !important;
+                width: auto !important;
+                text-align: left !important;
+                letter-spacing: 1.5px !important;
+                color: #2C3742 !important;
             }
+            /* 移除 ::before 覆蓋（讓 h3 真實內容顯示） */
             .hub-card h3::before,
             .hub-card-content h3::before {
-                display: inline-block !important;
-                font-size: 18px !important;
-                color: #2C3742 !important;
-                letter-spacing: 3px !important;
-                padding-left: 3px !important;
-                line-height: 1 !important;
-                text-align: center !important;
+                display: none !important;
+                content: none !important;
             }
-            .hub-card.personal h3::before { content: "個人選購" !important; }
-            .hub-card.pro h3::before { content: "企業採購" !important; }
-            .hub-card.custom h3::before { content: "客製諮詢" !important; }
-            .hub-card.info h3::before { content: "品牌藝廊" !important; }
+            .hub-card.personal h3::before,
+            .hub-card.pro h3::before,
+            .hub-card.products h3::before,
+            .hub-card.custom h3::before,
+            .hub-card.info h3::before { content: none !important; display: none !important; }
 
-            /* 副標 - 隱藏 */
+            /* 副標 - 顯示小一點 */
             .hub-card p,
             .hub-card-content p {
-                display: none !important;
+                display: block !important;
+                font-size: 9.5px !important;
+                line-height: 1.3 !important;
+                margin: 1px 0 0 !important;
+                padding: 0 !important;
+                color: #555 !important;
+                letter-spacing: 0 !important;
             }
 
-            /* 按鈕改成只剩箭頭 */
+            /* 按鈕只剩箭頭 */
             .hub-btn {
                 padding: 0 !important;
                 font-size: 0 !important;
                 background: transparent !important;
                 color: #B8864B !important;
                 border: none !important;
-                margin: 0 !important;
+                margin: 0 0 0 8px !important;
                 width: auto !important;
                 box-shadow: none !important;
                 display: flex !important;
                 justify-content: center !important;
                 align-items: center !important;
+                flex-shrink: 0 !important;
             }
             .hub-btn span:not(.hub-arrow) {
                 display: none !important;
             }
             .hub-arrow {
                 color: #B8864B !important;
-                font-size: 22px !important;
+                font-size: 18px !important;
                 font-weight: 300 !important;
                 display: inline-block !important;
                 line-height: 1 !important;
@@ -541,13 +665,13 @@
             /* 點擊瞬間反白 */
             .hub-card:active {
                 background: #B8864B !important;
-                transform: scale(0.97) !important;
+                transform: scale(0.98) !important;
                 transition: all 0.15s ease !important;
             }
-            .hub-card:active.personal h3::before,
-            .hub-card:active.pro h3::before,
-            .hub-card:active.custom h3::before,
-            .hub-card:active.info h3::before {
+            .hub-card:active h3,
+            .hub-card:active .hub-card-content h3,
+            .hub-card:active p,
+            .hub-card:active .hub-card-content p {
                 color: #ffffff !important;
             }
             .hub-card:active .hub-card-series-tag {
@@ -556,6 +680,15 @@
             }
             .hub-card:active .hub-arrow {
                 color: #ffffff !important;
+            }
+
+            /* 社群區縮小 + margin 收緊，確保看得到 */
+            .hub-social-links {
+                margin-top: 8px !important;
+                gap: 18px !important;
+            }
+            .hub-social-icon {
+                font-size: 17px !important;
             }
 
             /* 社群區 */
@@ -659,13 +792,14 @@
             <div class="hub-main">
                 <!-- 卡片區 -->
                 <div class="hub-cards">
-                    <!-- 個人選購 卡片 -->
-                    <div class="hub-card personal" onclick="selectUserMode('B2C')">
+                    <!-- ===== 採購群 ===== -->
+                    <!-- 選料 (B2C) -->
+                    <div class="hub-card personal hub-group-purchase" onclick="selectUserMode('B2C')">
                         <div class="hub-card-inner">
-                            <div class="hub-card-series-tag personal-tag">B2C</div>
+                            <div class="hub-card-series-tag personal-tag">MATERIALS</div>
                             <div class="hub-card-content">
-                                <h3>個人 DIY / 創客</h3>
-                                <p>直覺的圖形化選購介面，適合少量訂製與個人專案</p>
+                                <h3>選料</h3>
+                                <p>個人 DIY · 少量精選 · 圖形化選購</p>
                             </div>
                             <div class="hub-btn personal-btn">
                                 <span>進入選購</span>
@@ -674,13 +808,13 @@
                         </div>
                     </div>
 
-                    <!-- 企業採購 卡片 -->
-                    <div class="hub-card pro" onclick="selectUserMode('B2B')">
+                    <!-- 批料 (B2B) -->
+                    <div class="hub-card pro hub-group-purchase" onclick="selectUserMode('B2B')">
                         <div class="hub-card-inner">
-                            <div class="hub-card-series-tag pro-tag">PRO / B2B</div>
+                            <div class="hub-card-series-tag pro-tag">WHOLESALE</div>
                             <div class="hub-card-content">
-                                <h3>企業採購</h3>
-                                <p>支援 Excel 批量匯入、物流預判與結構分析</p>
+                                <h3>批料</h3>
+                                <p>企業批量採購 · Excel 匯入 · 物流預判</p>
                             </div>
                             <div class="hub-btn pro-btn">
                                 <span>進入採購中心</span>
@@ -689,28 +823,44 @@
                         </div>
                     </div>
 
-                    <!-- 客製設計 卡片 -->
-                    <div class="hub-card custom" onclick="selectUserMode('CUSTOM')">
+                    <!-- 自家成品 (PRODUCTS) -->
+                    <div class="hub-card products hub-group-purchase" onclick="selectUserMode('PRODUCTS')">
                         <div class="hub-card-inner">
-                            <div class="hub-card-series-tag custom-tag">CUSTOM / OEM</div>
+                            <div class="hub-card-series-tag products-tag">PRODUCTS</div>
                             <div class="hub-card-content">
-                                <h3>客製設計 / OEM 詢問</h3>
-                                <p>有圖面、CAD 或參考照片？由專人為您規劃報價</p>
+                                <h3>自家成品</h3>
+                                <p>ALUMIBRO 自有研發、自家製造</p>
                             </div>
-                            <div class="hub-btn custom-btn">
-                                <span>開始諮詢服務</span>
+                            <div class="hub-btn products-btn">
+                                <span>瀏覽商品</span>
                                 <span class="hub-arrow">→</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 品牌與藝廊 卡片 -->
-                    <div class="hub-card info" onclick="selectUserMode('INFO')">
+                    <!-- ===== 服務群 ===== -->
+                    <!-- 客製專案 (CUSTOM) -->
+                    <div class="hub-card custom hub-group-service" onclick="selectUserMode('CUSTOM')">
                         <div class="hub-card-inner">
-                            <div class="hub-card-series-tag info-tag">BRAND & GALLERY</div>
+                            <div class="hub-card-series-tag custom-tag">CUSTOM</div>
                             <div class="hub-card-content">
-                                <h3>品牌與藝廊</h3>
-                                <p>探索專案範例、客製成品，以及關於 ALUMIBRO 鋁材兄弟</p>
+                                <h3>客製專案</h3>
+                                <p>圖面、CAD、想法 · 量身規劃報價</p>
+                            </div>
+                            <div class="hub-btn custom-btn">
+                                <span>開始諮詢</span>
+                                <span class="hub-arrow">→</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 品牌藝廊 (GALLERY) -->
+                    <div class="hub-card info hub-group-service" onclick="selectUserMode('INFO')">
+                        <div class="hub-card-inner">
+                            <div class="hub-card-series-tag info-tag">GALLERY</div>
+                            <div class="hub-card-content">
+                                <h3>品牌藝廊</h3>
+                                <p>作品案例 · 品牌故事 · 關於我們</p>
                             </div>
                             <div class="hub-btn info-btn">
                                 <span>深入了解</span>

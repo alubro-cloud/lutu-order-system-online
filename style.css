@@ -7840,3 +7840,53 @@ body.mode-b2b {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
+
+/* ============================================================
+   Hub 新增區塊：自家成品 PRODUCTS（採購群第三張）
+   品牌藝廊 GALLERY 補上配色（採購群是金棕、服務群是灰藍）
+   ============================================================ */
+
+/* PRODUCTS：用較深的金棕色（呼應「自家研發」的厚實感）*/
+.products-tag {
+    background: #f5efe5;
+    color: #8a6f4f;
+}
+
+.products-btn {
+    color: #8a6f4f;
+    border-top: 1px solid rgba(138, 111, 79, 0.2);
+}
+
+.hub-card.products:hover .products-btn {
+    background: rgba(138, 111, 79, 0.1);
+    font-weight: 500;
+}
+
+/* GALLERY (info)：灰藍 — 跟 personal 同色系但稍深 */
+.info-tag {
+    background: #eef2f7;
+    color: #6b7d93;
+}
+
+.info-btn {
+    color: #6b7d93;
+    border-top: 1px solid rgba(107, 125, 147, 0.2);
+}
+
+.hub-card.info:hover .info-btn {
+    background: rgba(107, 125, 147, 0.1);
+    font-weight: 500;
+}
+
+/* === 採購群（金棕系）hover 暖底 === */
+.hub-card.personal:hover,
+.hub-card.pro:hover,
+.hub-card.products:hover {
+    background: linear-gradient(180deg, #fbf6ed 0%, #f5ecd9 100%);
+}
+
+/* === 服務群（灰藍系）hover 冷底 === */
+.hub-card.custom:hover,
+.hub-card.info:hover {
+    background: linear-gradient(180deg, #f5f8fc 0%, #e8eff7 100%);
+}
