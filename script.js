@@ -1973,16 +1973,19 @@ window.selectUserMode = function (mode) {
         if (b2bTopbar) b2bTopbar.classList.add('hidden');
         document.getElementById('info-topbar')?.classList.add('hidden');
     } else if (mode === 'PRODUCTS') {
-        // [新增] 自家成品 — 暫時 placeholder，之後實作產品頁
-        // 為了不破壞既有流程，先彈一個訊息或進入 INFO 區塊
-        alert('「自家成品」頁面建置中，敬請期待 🛠️\n目前已有的標準品：ALUMIBRO 攤車');
-        // 重新顯示 hub 讓使用者選別的
-        const hub = document.getElementById('hub-overlay');
-        if (hub) {
-            hub.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        return;  // 不繼續執行後面的邏輯
+        // 自家成品 — 顯示市集攤車產品頁
+        document.body.classList.add('mode-products');
+        const productsView = document.getElementById('view-products');
+        if (productsView) productsView.classList.remove('hidden');
+        document.querySelectorAll('.content-view').forEach(v => {
+            if (v.id !== 'view-products') v.classList.add('hidden');
+        });
+        sidebar?.classList.add('hidden');
+        if (b2cTopbar) b2cTopbar.classList.add('hidden');
+        if (b2bTopbar) b2bTopbar.classList.add('hidden');
+        document.getElementById('info-topbar')?.classList.add('hidden');
+        // 滾到頂端
+        window.scrollTo(0, 0);
     } else if (mode === 'INFO') {
         document.body.classList.remove('mode-custom');
         document.body.classList.add('mode-info');
@@ -2104,9 +2107,10 @@ window.returnToHub = function () {
     }
 
     // Hide everything else
-    document.body.classList.remove('mode-b2b', 'mode-b2c', 'mode-custom', 'mode-info');
+    document.body.classList.remove('mode-b2b', 'mode-b2c', 'mode-custom', 'mode-info', 'mode-products');
     document.getElementById('b2b-dashboard')?.classList.add('hidden');
     document.getElementById('view-custom-inquiry')?.classList.add('hidden');
+    document.getElementById('view-products')?.classList.add('hidden');
 
     // Hide B2C Shell
     const b2cShellElements = [
@@ -2120,6 +2124,43 @@ window.returnToHub = function () {
     // Hide Both Topbars
     document.getElementById('b2cTopbar')?.classList.add('hidden');
     document.getElementById('b2bTopbar')?.classList.add('hidden');
+};
+
+/* ============================================================
+   自家成品 — 市集攤車 左右切換大圖
+   ============================================================ */
+window.changeProductHero = function (delta) {
+    const totalImgs = 5; // shop1 ~ shop5
+    const heroImg = document.getElementById('productsHeroImg');
+    const idxLabel = document.getElementById('heroCurrentIdx');
+    if (!heroImg) return;
+
+    let curIdx = parseInt(heroImg.getAttribute('data-index') || '0', 10);
+    curIdx = (curIdx + delta + totalImgs) % totalImgs;
+    heroImg.setAttribute('data-index', curIdx);
+
+    // 淡入淡出切換
+    heroImg.style.opacity = '0';
+    setTimeout(() => {
+        heroImg.src = `assets/shop${curIdx + 1}.png`;
+        heroImg.style.opacity = '1';
+    }, 150);
+    if (idxLabel) idxLabel.textContent = (curIdx + 1).toString();
+};
+
+// 舊的 switchProductHero (縮圖點擊) — 已移除縮圖,保留函式避免錯誤
+window.switchProductHero = function (thumbEl) {
+    const newSrc = thumbEl.getAttribute('data-src');
+    const heroImg = document.getElementById('productsHeroImg');
+    if (heroImg && newSrc) {
+        heroImg.style.opacity = '0';
+        setTimeout(() => {
+            heroImg.src = newSrc;
+            heroImg.style.opacity = '1';
+        }, 150);
+    }
+    document.querySelectorAll('#productsHeroThumbs .products-thumb').forEach(t => t.classList.remove('active'));
+    thumbEl.classList.add('active');
 };
 
 // Track current B2B series for navigation

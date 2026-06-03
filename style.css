@@ -7890,3 +7890,985 @@ body.mode-b2b {
 .hub-card.info:hover {
     background: linear-gradient(180deg, #f5f8fc 0%, #e8eff7 100%);
 }
+
+/* ============================================================
+   自家成品 — 市集攤車 滿版產品頁
+   不超出 100vh,左 4 步驟 + 右產品資訊
+   ============================================================ */
+
+#view-products {
+    background: #3D4D5C !important;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+#view-products.hidden {
+    display: none !important;
+}
+
+.products-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* === 頂部 nav === */
+.products-topbar {
+    background: rgba(0, 0, 0, 0.18);
+    padding: 10px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-shrink: 0;
+}
+
+.products-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.products-back {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.products-back:hover {
+    color: #f2dcb6;
+}
+
+.products-divider {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.products-breadcrumb {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+}
+
+.products-topbar-right {
+    color: rgba(220, 196, 160, 0.7);
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+}
+
+/* === 主內容區 === */
+.products-main {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 14px;
+    padding: 14px;
+    overflow: hidden;
+}
+
+/* === 左：4 步驟 === */
+.products-left {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    gap: 10px;
+}
+
+.products-section-title {
+    font-size: 0.75rem;
+    color: rgba(220, 196, 160, 0.6);
+    letter-spacing: 2.5px;
+    flex-shrink: 0;
+}
+
+.assembly-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    flex: 1;
+    min-height: 0;
+}
+
+.assembly-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    transition: all 0.3s ease;
+}
+
+.assembly-card:hover {
+    background: rgba(220, 196, 160, 0.08);
+    border-color: rgba(220, 196, 160, 0.25);
+    transform: translateY(-2px);
+}
+
+.assembly-img-wrap {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    background: linear-gradient(135deg, #4A5A6B 0%, #2C3742 100%);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.assembly-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.assembly-step-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background: rgba(220, 196, 160, 0.3);
+    color: #f2dcb6;
+    font-size: 0.72rem;
+    padding: 2px 7px;
+    border-radius: 99px;
+    border: 1px solid rgba(220, 196, 160, 0.4);
+    z-index: 2;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.assembly-text {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.assembly-title {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.assembly-desc {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.5;
+}
+
+/* === 右：產品資訊 === */
+.products-right {
+    background: rgba(36, 48, 57, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    gap: 10px;
+}
+
+/* 縮圖列 */
+.products-thumb-wrap {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+    height: 50px;
+}
+
+.products-thumb {
+    width: 60px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #4A5A6B 0%, #2C3742 100%);
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.65;
+}
+
+.products-thumb.active {
+    border-color: rgba(220, 196, 160, 0.6);
+    opacity: 1;
+    box-shadow: 0 0 0 2px rgba(220, 196, 160, 0.2);
+}
+
+.products-thumb:hover {
+    opacity: 1;
+}
+
+/* 大圖區 */
+.products-hero-img-wrap {
+    flex: 1;
+    min-height: 0;
+    background: linear-gradient(135deg, #5A6B7C 0%, #2C3742 100%);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.products-hero-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+/* 產品名 */
+.products-info-header {
+    flex-shrink: 0;
+}
+
+.products-tagline {
+    font-size: 0.7rem;
+    color: rgba(220, 196, 160, 0.6);
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+}
+
+.products-name {
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: #f2dcb6;
+    margin-bottom: 2px;
+    line-height: 1.1;
+    letter-spacing: 2px;
+}
+
+.products-subname {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.products-description {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    flex-shrink: 0;
+}
+
+/* 規格表 */
+.products-specs {
+    flex-shrink: 0;
+}
+
+.products-specs-title {
+    font-size: 0.72rem;
+    color: rgba(220, 196, 160, 0.55);
+    letter-spacing: 2.5px;
+    margin-bottom: 6px;
+}
+
+.products-specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+}
+
+.spec-item {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 6px 10px;
+    border-radius: 5px;
+    border-left: 2px solid rgba(220, 196, 160, 0.4);
+}
+
+.spec-label {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2px;
+}
+
+.spec-value {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
+}
+
+/* 價格與 CTA */
+.products-price-cta {
+    margin-top: auto;
+    flex-shrink: 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.products-price-block {
+    flex: 1;
+}
+
+.products-price-amount {
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: #f2dcb6;
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+.products-price-note {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 2px;
+}
+
+.products-cta-line {
+    background: rgba(220, 196, 160, 0.25);
+    border: 1px solid rgba(220, 196, 160, 0.5);
+    color: #f2dcb6;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.products-cta-line:hover {
+    background: rgba(220, 196, 160, 0.4);
+    border-color: rgba(220, 196, 160, 0.7);
+    transform: translateY(-1px);
+}
+
+.products-cta-line i {
+    font-size: 1.1rem;
+}
+
+/* ============================================================
+   手機版產品頁
+   ============================================================ */
+@media (max-width: 768px) {
+    #view-products {
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        max-height: none;
+        position: relative;
+    }
+    
+    .products-page {
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .products-topbar {
+        padding: 8px 14px;
+    }
+    
+    .products-topbar-right {
+        font-size: 0.7rem;
+    }
+    
+    .products-main {
+        grid-template-columns: 1fr;
+        padding: 10px;
+        gap: 12px;
+        height: auto;
+        overflow: visible;
+    }
+    
+    .products-left {
+        order: 2;
+    }
+    
+    .products-right {
+        order: 1;
+        padding: 14px;
+    }
+    
+    /* 手機版組裝步驟改 2x2 */
+    .assembly-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    
+    .assembly-img-wrap {
+        aspect-ratio: 9 / 12;
+    }
+    
+    .assembly-title {
+        font-size: 0.88rem;
+    }
+    
+    .assembly-desc {
+        font-size: 0.72rem;
+    }
+    
+    /* 手機版縮圖列縮短 */
+    .products-thumb {
+        width: 48px;
+        height: 40px;
+    }
+    .products-thumb-wrap {
+        height: 40px;
+    }
+    
+    /* 手機版大圖高度限制 */
+    .products-hero-img-wrap {
+        height: 220px;
+        flex: none;
+    }
+    
+    .products-name {
+        font-size: 1.4rem;
+    }
+    
+    .products-description {
+        font-size: 0.82rem;
+    }
+    
+    .products-price-amount {
+        font-size: 1.25rem;
+    }
+    
+    .products-price-cta {
+        flex-direction: column;
+        gap: 8px;
+        align-items: stretch;
+    }
+    
+    .products-cta-line {
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+/* ============================================================
+   產品頁 右側面板 — 重新排版
+   上半: 左文字 + 右 9:16 大圖
+   下半: 5 張縮圖橫排
+   底部: 價格 + CTA
+   ============================================================ */
+
+/* 上半 row 容器 */
+.products-info-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 14px;
+    flex: 1;
+    min-height: 0;
+}
+
+/* 左文字欄 */
+.products-text-col {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    gap: 10px;
+    overflow: hidden;
+}
+
+/* 大圖 9:16 — 覆蓋掉前面的設定 */
+.products-info-row .products-hero-img-wrap {
+    aspect-ratio: 9 / 16;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    flex: none;
+    background: linear-gradient(135deg, #5A6B7C 0%, #2C3742 100%);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.products-info-row .products-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 規格表改成單欄直排（在窄空間） */
+.products-text-col .products-specs-grid {
+    grid-template-columns: 1fr;
+    gap: 4px;
+}
+
+.products-text-col .spec-item {
+    padding: 5px 8px;
+}
+
+.products-text-col .spec-label {
+    font-size: 0.68rem;
+}
+
+.products-text-col .spec-value {
+    font-size: 0.82rem;
+}
+
+/* 縮圖列 — 改成 5 張 9:16 */
+.products-right > .products-thumb-wrap {
+    height: auto;
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 8px;
+}
+
+.products-right > .products-thumb-wrap .products-thumb {
+    width: 18%;
+    height: auto;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+}
+
+/* ============================================================
+   手機版調整 — 左右改直排
+   ============================================================ */
+@media (max-width: 768px) {
+    .products-info-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .products-info-row .products-hero-img-wrap {
+        aspect-ratio: 9 / 16;
+        max-height: 50vh;
+    }
+    
+    .products-text-col .products-specs-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .products-right > .products-thumb-wrap .products-thumb {
+        width: 18%;
+    }
+}
+
+/* ============================================================
+   產品頁修正 — 左四格卡片自動填滿高度,不撐爆
+   ============================================================ */
+
+@media (min-width: 769px) {
+    /* 整體容器 flex 列高 */
+    .products-main {
+        height: calc(100vh - 50px) !important;
+        max-height: calc(100vh - 50px) !important;
+    }
+
+    /* 左四格組裝 — 卡片用 flex 自動分配 */
+    .assembly-card {
+        height: 100% !important;
+        max-height: 100% !important;
+    }
+
+    /* 圖片框 — 移除固定 9/16,改用 flex 撐滿 */
+    .assembly-img-wrap {
+        aspect-ratio: auto !important;
+        flex: 1 !important;
+        min-height: 0 !important;
+        max-height: none !important;
+    }
+
+    /* 文字區固定高度 */
+    .assembly-text {
+        flex: 0 0 auto !important;
+        margin-top: 8px !important;
+    }
+
+    .assembly-title {
+        font-size: 0.92rem !important;
+        margin-bottom: 2px !important;
+    }
+
+    .assembly-desc {
+        font-size: 0.74rem !important;
+        line-height: 1.4 !important;
+    }
+
+    /* 右側面板:確保 SPECS 第 4 格不被遮 */
+    .products-right {
+        overflow: visible !important;
+    }
+
+    /* 右側上半 row 限制高度,讓下方縮圖+價格有空間 */
+    .products-info-row {
+        flex: 1 !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* 左文字欄不超出 row */
+    .products-text-col {
+        overflow-y: auto !important;
+        max-height: 100% !important;
+    }
+    /* 隱藏捲動條 */
+    .products-text-col::-webkit-scrollbar {
+        width: 0;
+        display: none;
+    }
+}
+
+/* ============================================================
+   產品頁修正 v3 — specs 第 4 格修復
+   ============================================================ */
+@media (min-width: 769px) {
+    /* products-text-col 不再 overflow,讓 specs 完整顯示 */
+    .products-text-col {
+        overflow-y: visible !important;
+        max-height: none !important;
+    }
+
+    /* 右側 info-row 確保不擋住內容 */
+    .products-info-row {
+        overflow: visible !important;
+        min-height: 0 !important;
+    }
+
+    /* SPECS 第 4 格膠囊強制顯示 */
+    .products-text-col .products-specs {
+        overflow: visible !important;
+    }
+
+    /* 縮圖列縮小,讓上方 row 有更多空間 */
+    .products-right > .products-thumb-wrap .products-thumb {
+        width: 16% !important;
+    }
+}
+
+/* ============================================================
+   產品頁修正 v4 — 圖框改白色底
+   ============================================================ */
+
+/* 左 4 步驟圖框 — 白底 */
+.assembly-img-wrap {
+    background: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* 右大圖區 — 白底 */
+.products-info-row .products-hero-img-wrap {
+    background: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* 縮圖列 — 白底 */
+.products-right > .products-thumb-wrap .products-thumb {
+    background: #ffffff !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+}
+
+/* 圖片本身用 contain 完整顯示在白底上 */
+.assembly-img,
+.products-info-row .products-hero-img,
+.products-right > .products-thumb-wrap .products-thumb {
+    object-fit: contain !important;
+    padding: 4px !important;
+    box-sizing: border-box !important;
+}
+
+/* 縮圖小一點的 padding */
+.products-right > .products-thumb-wrap .products-thumb {
+    padding: 2px !important;
+}
+
+/* 步驟徽章在白底上要改深色才看得到 */
+.assembly-step-badge {
+    background: rgba(220,196,160,0.9) !important;
+    color: #2C3742 !important;
+    border-color: rgba(184,134,75,0.6) !important;
+    font-weight: 600 !important;
+}
+
+/* ============================================================
+   產品頁修正 v5 — 左 4 張組裝圖等高
+   ============================================================ */
+@media (min-width: 769px) {
+    /* 文字區固定高度,確保圖框等高 */
+    .assembly-text {
+        height: 60px !important;
+        max-height: 60px !important;
+        min-height: 60px !important;
+        flex: 0 0 60px !important;
+        overflow: hidden !important;
+    }
+}
+
+/* ============================================================
+   產品頁 v6 — 大圖左右切換 + SPECS 8 格
+   ============================================================ */
+
+/* 大圖左右切換按鈕 */
+.hero-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border: none;
+    width: 36px;
+    height: 56px;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    backdrop-filter: blur(6px);
+    z-index: 5;
+    font-family: serif;
+    padding: 0;
+}
+
+.hero-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.6);
+    color: #f2dcb6;
+}
+
+.hero-nav-prev {
+    left: 8px;
+    border-radius: 0 6px 6px 0;
+}
+
+.hero-nav-next {
+    right: 8px;
+    border-radius: 6px 0 0 6px;
+}
+
+/* 大圖計數器 */
+.hero-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.55);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.72rem;
+    padding: 3px 9px;
+    border-radius: 99px;
+    letter-spacing: 1px;
+    backdrop-filter: blur(6px);
+    z-index: 5;
+}
+
+/* SPECS 8 格緊湊版 */
+@media (min-width: 769px) {
+    .products-text-col .products-specs-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 4px !important;
+    }
+    .products-text-col .spec-item {
+        padding: 4px 8px !important;
+    }
+    .products-text-col .spec-label {
+        font-size: 0.65rem !important;
+        line-height: 1.2 !important;
+    }
+    .products-text-col .spec-value {
+        font-size: 0.78rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    /* 描述文字也緊湊一點 */
+    .products-description {
+        font-size: 0.82rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 8px !important;
+    }
+    
+    .products-specs-title {
+        margin-bottom: 4px !important;
+    }
+    
+    /* 4 步驟描述 2 行 */
+    .assembly-desc {
+        font-size: 0.72rem !important;
+        line-height: 1.5 !important;
+    }
+    
+    /* 文字區高度自動 (因為說明變更多了) */
+    .assembly-text {
+        height: auto !important;
+        min-height: 75px !important;
+        max-height: 90px !important;
+        flex: 0 0 auto !important;
+    }
+}
+
+/* 手機版 */
+@media (max-width: 768px) {
+    .hero-nav-btn {
+        width: 30px;
+        height: 50px;
+        font-size: 24px;
+    }
+    .hero-counter {
+        font-size: 0.68rem;
+        padding: 2px 7px;
+    }
+}
+
+/* ============================================================
+   產品頁 v7 — 4 格真正等高 + 側翼桌板贈送標記 + SPECS 9 格
+   ============================================================ */
+
+/* 贈送標籤 */
+.spec-gift-tag {
+    background: linear-gradient(135deg, rgba(218, 178, 178, 0.45), rgba(186, 129, 129, 0.45));
+    color: #fbe0e0;
+    font-size: 0.62rem;
+    padding: 0px 5px;
+    border-radius: 99px;
+    border: 1px solid rgba(218, 178, 178, 0.55);
+    margin-left: 5px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.spec-gift {
+    border-left-color: rgba(218, 178, 178, 0.6) !important;
+}
+
+/* 4 步驟卡片真正等高 — 用 grid 而非 flex,並把文字區固定佔比 */
+@media (min-width: 769px) {
+    .assembly-grid {
+        align-items: stretch !important;
+    }
+    
+    .assembly-card {
+        display: grid !important;
+        grid-template-rows: 1fr 90px !important;
+        gap: 6px !important;
+    }
+    
+    .assembly-img-wrap {
+        flex: none !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin-bottom: 0 !important;
+        grid-row: 1;
+    }
+    
+    .assembly-text {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        flex: none !important;
+        grid-row: 2;
+        margin-top: 0 !important;
+        overflow: hidden;
+    }
+    
+    .assembly-desc {
+        font-size: 0.7rem !important;
+        line-height: 1.5 !important;
+    }
+    
+    .assembly-title {
+        font-size: 0.9rem !important;
+        margin-bottom: 3px !important;
+    }
+}
+
+/* ============================================================
+   產品頁 v8 — 左右切換按鈕改到圖片下方
+   ============================================================ */
+
+/* hero 整體用 column 排列：圖在上、按鈕列在下 */
+.products-hero-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 0;
+    flex: 1;
+}
+
+.products-hero-col .products-hero-img-wrap {
+    flex: 1;
+    min-height: 0;
+    position: relative;
+    background: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 下方按鈕列 */
+.hero-nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-shrink: 0;
+    padding: 4px 0;
+}
+
+/* 覆蓋原本 absolute 定位的按鈕,改成靜態 */
+.hero-nav-row .hero-nav-btn {
+    position: static !important;
+    transform: none !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    width: 36px !important;
+    height: 32px !important;
+    font-size: 22px !important;
+    border-radius: 6px !important;
+    backdrop-filter: none !important;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-family: serif;
+    padding: 0;
+    line-height: 1;
+}
+
+.hero-nav-row .hero-nav-btn:hover {
+    background: rgba(220, 196, 160, 0.25) !important;
+    border-color: rgba(220, 196, 160, 0.5) !important;
+    color: #f2dcb6 !important;
+}
+
+/* 下方計數器(從浮層改成中央) */
+.hero-nav-row .hero-counter {
+    position: static !important;
+    bottom: auto !important;
+    right: auto !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    color: rgba(255, 255, 255, 0.65) !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 1.5px !important;
+    min-width: 50px;
+    text-align: center;
+}
