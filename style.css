@@ -8872,3 +8872,471 @@ body.mode-b2b {
     min-width: 50px;
     text-align: center;
 }
+
+/* ============================================================
+   Hub 卡片按鈕 — 移除箭頭、文字置中、加呼吸空間
+   ============================================================ */
+@media (min-width: 769px) {
+    .hub-btn {
+        text-align: center !important;
+        justify-content: center !important;
+        gap: 0 !important;
+        padding: 10px 20px !important;
+        letter-spacing: 2px !important;
+        font-size: 0.82rem !important;
+    }
+    
+    /* 移除箭頭佔位 */
+    .hub-arrow {
+        display: none !important;
+    }
+}
+
+/* 手機版按鈕也置中 */
+@media (max-width: 768px) {
+    .hub-btn {
+        justify-content: flex-end !important;
+    }
+    .hub-arrow {
+        display: inline-block !important;
+    }
+}
+
+/* ============================================================
+   Hub 卡片帶圖版 (has-image)
+   圖在上半 (4:3),文字在下半
+   ============================================================ */
+
+/* 整張卡 — 改成 column 排版,圖在上、內容在下 */
+.hub-card.has-image {
+    padding: 0 !important;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 圖片區 */
+.hub-card-image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.hub-card-image svg {
+    display: block;
+}
+
+/* 標籤浮在圖左上角 */
+.hub-card.has-image .hub-card-image .hub-card-series-tag {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(255, 255, 255, 0.92) !important;
+    padding: 3px 9px !important;
+    border-radius: 4px !important;
+    font-size: 0.62rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 1.5px !important;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+}
+
+/* NEW 徽章浮在圖右上角 */
+.hub-card-new-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: linear-gradient(135deg, #d4a05e, #b8864b);
+    color: #ffffff;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    z-index: 3;
+    box-shadow: 0 2px 6px rgba(184, 134, 75, 0.3);
+}
+
+/* 卡片下方文字區 */
+.hub-card.has-image .hub-card-inner {
+    padding: 14px 12px 12px !important;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    text-align: center !important;
+    gap: 0 !important;
+}
+
+.hub-card.has-image .hub-card-content {
+    width: 100%;
+    flex: 0 0 auto !important;
+}
+
+.hub-card.has-image .hub-card-content h3 {
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    color: #2C3742 !important;
+    margin-bottom: 4px !important;
+    letter-spacing: 2px !important;
+    text-align: center !important;
+}
+
+.hub-card.has-image .hub-card-content p {
+    font-size: 0.72rem !important;
+    color: #7a8694 !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    text-align: center !important;
+}
+
+/* 卡片底部按鈕 — 帶頂線 */
+.hub-card.has-image .hub-btn {
+    width: 100% !important;
+    margin-top: 10px !important;
+    padding: 7px 0 !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+    font-size: 0.72rem !important;
+    color: #5a6a78 !important;
+    letter-spacing: 1.5px !important;
+    background: transparent !important;
+    text-align: center !important;
+    justify-content: center !important;
+}
+
+/* hover 效果重新定義 */
+.hub-card.has-image:hover .hub-card-image {
+    transform: scale(1.02);
+    transition: transform 0.4s ease;
+}
+
+.hub-card.has-image:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s ease;
+}
+
+/* 桌面版 — 卡片配色 (覆蓋採購群/服務群 hover) */
+@media (min-width: 769px) {
+    .hub-card.has-image {
+        padding: 0 !important;
+    }
+}
+
+/* ============================================================
+   手機版 — 圖片區再縮小,維持橫排
+   ============================================================ */
+@media (max-width: 768px) {
+    .hub-card.has-image {
+        flex-direction: row !important;
+        padding: 0 !important;
+    }
+    
+    .hub-card.has-image .hub-card-image {
+        width: 70px !important;
+        height: 70px !important;
+        aspect-ratio: 1 / 1 !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .hub-card.has-image .hub-card-image svg {
+        width: 80% !important;
+        height: 80% !important;
+    }
+    
+    /* 手機版隱藏 series-tag(空間太小) */
+    .hub-card.has-image .hub-card-image .hub-card-series-tag {
+        display: none !important;
+    }
+    
+    /* NEW 徽章手機版改小 */
+    .hub-card-new-badge {
+        font-size: 0.55rem !important;
+        padding: 2px 6px !important;
+        top: 4px !important;
+        right: 4px !important;
+    }
+    
+    .hub-card.has-image .hub-card-inner {
+        padding: 10px 12px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        text-align: left !important;
+    }
+    
+    .hub-card.has-image .hub-card-content {
+        text-align: left !important;
+        align-items: flex-start !important;
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+    }
+    
+    .hub-card.has-image .hub-card-content h3 {
+        text-align: left !important;
+        margin-bottom: 2px !important;
+    }
+    
+    .hub-card.has-image .hub-card-content p {
+        text-align: left !important;
+    }
+    
+    .hub-card.has-image .hub-btn {
+        width: auto !important;
+        border-top: none !important;
+        margin-top: 0 !important;
+        padding: 0 0 0 8px !important;
+        font-size: 0 !important;
+        flex-shrink: 0 !important;
+    }
+}
+
+/* ============================================================
+   Hub 卡片 hover — 標題與副標改白字 (帶圖版)
+   ============================================================ */
+@media (min-width: 769px) {
+    /* 採購群 hover 暖底時 文字改白 */
+    .hub-card.has-image.personal:hover .hub-card-content h3,
+    .hub-card.has-image.pro:hover .hub-card-content h3,
+    .hub-card.has-image.products:hover .hub-card-content h3 {
+        color: #ffffff !important;
+    }
+    .hub-card.has-image.personal:hover .hub-card-content p,
+    .hub-card.has-image.pro:hover .hub-card-content p,
+    .hub-card.has-image.products:hover .hub-card-content p {
+        color: rgba(255, 255, 255, 0.85) !important;
+    }
+    .hub-card.has-image.personal:hover .hub-btn,
+    .hub-card.has-image.pro:hover .hub-btn,
+    .hub-card.has-image.products:hover .hub-btn {
+        color: #ffffff !important;
+        border-top-color: rgba(255, 255, 255, 0.2) !important;
+    }
+    
+    /* 服務群 hover 冷底時 文字改白 */
+    .hub-card.has-image.custom:hover .hub-card-content h3,
+    .hub-card.has-image.info:hover .hub-card-content h3 {
+        color: #ffffff !important;
+    }
+    .hub-card.has-image.custom:hover .hub-card-content p,
+    .hub-card.has-image.info:hover .hub-card-content p {
+        color: rgba(255, 255, 255, 0.85) !important;
+    }
+    .hub-card.has-image.custom:hover .hub-btn,
+    .hub-card.has-image.info:hover .hub-btn {
+        color: #ffffff !important;
+        border-top-color: rgba(255, 255, 255, 0.2) !important;
+    }
+    
+    /* hover 整張卡片底色加深 */
+    .hub-card.has-image.personal:hover,
+    .hub-card.has-image.pro:hover,
+    .hub-card.has-image.products:hover {
+        background: linear-gradient(180deg, #b8864b 0%, #8a6533 100%) !important;
+    }
+    .hub-card.has-image.custom:hover,
+    .hub-card.has-image.info:hover {
+        background: linear-gradient(180deg, #6b7d93 0%, #4a5868 100%) !important;
+    }
+}
+
+/* ============================================================
+   Hub 卡片 hover — 按鈕加半透明白底, 與卡片底色區隔
+   ============================================================ */
+@media (min-width: 769px) {
+    /* 採購群 + 服務群 hover 時, 按鈕加半透明白底 */
+    .hub-card.has-image.personal:hover .hub-btn,
+    .hub-card.has-image.pro:hover .hub-btn,
+    .hub-card.has-image.products:hover .hub-btn,
+    .hub-card.has-image.custom:hover .hub-btn,
+    .hub-card.has-image.info:hover .hub-btn {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.25) !important;
+        color: #ffffff !important;
+        font-weight: 500 !important;
+    }
+    
+    /* hover 按鈕區再 hover (滑到按鈕上)變更亮 */
+    .hub-card.has-image:hover .hub-btn:hover {
+        background: rgba(255, 255, 255, 0.25) !important;
+    }
+}
+
+/* ============================================================
+   Hub 卡片 hover 金棕色再淡 (覆蓋前面 #b8864b → 較淺色)
+   ============================================================ */
+@media (min-width: 769px) {
+    .hub-card.has-image.personal:hover,
+    .hub-card.has-image.pro:hover,
+    .hub-card.has-image.products:hover {
+        background: linear-gradient(180deg, #d4ad7c 0%, #b58a55 100%) !important;
+    }
+    
+    .hub-card.has-image.custom:hover,
+    .hub-card.has-image.info:hover {
+        background: linear-gradient(180deg, #8a9aae 0%, #6a7888 100%) !important;
+    }
+}
+
+/* ============================================================
+   Hub 卡片 hover — 全部統一金棕色 (採購/服務群相同)
+   ============================================================ */
+@media (min-width: 769px) {
+    .hub-card.has-image.personal:hover,
+    .hub-card.has-image.pro:hover,
+    .hub-card.has-image.products:hover,
+    .hub-card.has-image.custom:hover,
+    .hub-card.has-image.info:hover {
+        background: linear-gradient(180deg, #d4ad7c 0%, #b58a55 100%) !important;
+    }
+}
+
+/* ============================================================
+   產品頁價格區 — 原價劃掉 + 特價
+   ============================================================ */
+.products-price-original {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.45);
+    text-decoration: line-through;
+    margin-bottom: 1px;
+    letter-spacing: 1px;
+}
+
+.products-price-amount {
+    color: #f2dcb6;
+    /* 主特價文字保持原本大小，但顯示「首發限量」感 */
+    position: relative;
+}
+
+/* 在特價旁邊加 OFF 標籤 */
+.products-price-block {
+    position: relative;
+}
+
+.products-price-block::after {
+    content: 'SALE';
+    position: absolute;
+    top: -4px;
+    right: 0;
+    background: linear-gradient(135deg, #d4a05e, #b8864b);
+    color: #ffffff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 1.5px;
+    box-shadow: 0 2px 6px rgba(184, 134, 75, 0.4);
+}
+
+/* ============================================================
+   Hub 卡片 hover — 移除變色,只保留放大浮動
+   覆蓋前面所有 hover 變色設定
+   ============================================================ */
+@media (min-width: 769px) {
+    /* hover 背景保持白色,不變色 */
+    .hub-card.has-image.personal:hover,
+    .hub-card.has-image.pro:hover,
+    .hub-card.has-image.products:hover,
+    .hub-card.has-image.custom:hover,
+    .hub-card.has-image.info:hover {
+        background: #ffffff !important;
+    }
+    
+    /* hover 文字保持原色 */
+    .hub-card.has-image:hover .hub-card-content h3 {
+        color: #2C3742 !important;
+    }
+    .hub-card.has-image:hover .hub-card-content p {
+        color: #7a8694 !important;
+    }
+    .hub-card.has-image:hover .hub-btn {
+        background: transparent !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+        color: #5a6a78 !important;
+        font-weight: normal !important;
+    }
+    
+    /* 放大浮動效果加強 */
+    .hub-card.has-image:hover {
+        transform: translateY(-6px) scale(1.02) !important;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    /* 圖片區也輕微放大 */
+    .hub-card.has-image:hover .hub-card-image {
+        transform: scale(1.05);
+        transition: transform 0.4s ease;
+    }
+    .hub-card.has-image .hub-card-image {
+        transition: transform 0.4s ease;
+    }
+}
+
+/* ============================================================
+   v9 修正: hover 按鈕一定要深色字 (覆蓋所有白字設定)
+   ============================================================ */
+@media (min-width: 769px) {
+    .hub-card.has-image:hover .hub-btn,
+    .hub-card.has-image.personal:hover .hub-btn,
+    .hub-card.has-image.pro:hover .hub-btn,
+    .hub-card.has-image.products:hover .hub-btn,
+    .hub-card.has-image.custom:hover .hub-btn,
+    .hub-card.has-image.info:hover .hub-btn {
+        background: transparent !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+        color: #5a6a78 !important;
+        font-weight: normal !important;
+    }
+    
+    /* 按鈕本身 hover 變淡金底 */
+    .hub-card.has-image:hover .hub-btn:hover {
+        background: rgba(184, 134, 75, 0.08) !important;
+        color: #8a6533 !important;
+    }
+}
+
+/* ============================================================
+   v10 修正: hover 大小標題也要深色 (覆蓋所有白字設定)
+   ============================================================ */
+@media (min-width: 769px) {
+    .hub-card.has-image:hover .hub-card-content h3,
+    .hub-card.has-image.personal:hover .hub-card-content h3,
+    .hub-card.has-image.pro:hover .hub-card-content h3,
+    .hub-card.has-image.products:hover .hub-card-content h3,
+    .hub-card.has-image.custom:hover .hub-card-content h3,
+    .hub-card.has-image.info:hover .hub-card-content h3 {
+        color: #2C3742 !important;
+    }
+    
+    .hub-card.has-image:hover .hub-card-content p,
+    .hub-card.has-image.personal:hover .hub-card-content p,
+    .hub-card.has-image.pro:hover .hub-card-content p,
+    .hub-card.has-image.products:hover .hub-card-content p,
+    .hub-card.has-image.custom:hover .hub-card-content p,
+    .hub-card.has-image.info:hover .hub-card-content p {
+        color: #7a8694 !important;
+    }
+}
+
+/* ============================================================
+   v11 修正: hover 時圖片標籤文字保持深色
+   ============================================================ */
+@media (min-width: 769px) {
+    .hub-card.has-image:hover .hub-card-image .hub-card-series-tag,
+    .hub-card.has-image.personal:hover .hub-card-image .hub-card-series-tag,
+    .hub-card.has-image.pro:hover .hub-card-image .hub-card-series-tag,
+    .hub-card.has-image.products:hover .hub-card-image .hub-card-series-tag,
+    .hub-card.has-image.custom:hover .hub-card-image .hub-card-series-tag,
+    .hub-card.has-image.info:hover .hub-card-image .hub-card-series-tag {
+        background: rgba(255, 255, 255, 0.92) !important;
+        color: #6a533a !important;
+    }
+}
