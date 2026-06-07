@@ -1145,7 +1145,7 @@
                         <div class="alumibro-srv-text">
                             <div class="alumibro-srv-tag">WHOLESALE</div>
                             <div class="alumibro-srv-title">批料</div>
-                            <div class="alumibro-srv-desc">企業批量 · Excel 匯入</div>
+                            <div class="alumibro-srv-desc">企業批量採購 · 訂單查詢</div>
                         </div>
                         <div class="alumibro-srv-arrow"><i class="fas fa-chevron-right"></i></div>
                     </div>
@@ -1937,8 +1937,6 @@
                     <button class="mobile-b2c-tab" id="mb-b2b-30" onclick="switchB2BSeries('30'); setMobileB2BTab(this)">30系列</button>
                     <button class="mobile-b2c-tab" id="mb-b2b-40" onclick="switchB2BSeries('40'); setMobileB2BTab(this)">40系列</button>
                     <div class="mobile-b2c-sep"></div>
-                    <button class="mobile-b2c-tab" onclick="openBOMUploadModal()"><i class="fas fa-file-upload"></i> 匯入</button>
-                    <button class="mobile-b2c-tab" onclick="downloadBOMTemplate()"><i class="fas fa-file-download"></i> 下載</button>
                     <button class="mobile-b2c-tab mobile-b2b-query" onclick="openOrderQueryModal()"><i class="fas fa-search"></i> 查詢</button>
                 </div>
             </div>
@@ -1967,13 +1965,6 @@
                             <input type="text" id="b2b-search-input" placeholder="搜尋全域商品 (如: M6, 鋁材...)"
                                 oninput="handleB2BSearch(this.value)">
                         </div>
-
-                        <button class="btn-xs btn-outline" onclick="openBOMUploadModal()">
-                            <i class="fas fa-file-upload"></i> 匯入 Excel
-                        </button>
-                        <button class="btn-xs btn-outline" onclick="downloadBOMTemplate()">
-                            <i class="fas fa-file-download"></i> 下載範本
-                        </button>
 
                         <button class="btn-query" onclick="openOrderQueryModal()">
                             <i class="fas fa-search"></i> 查詢訂單
@@ -2008,7 +1999,7 @@
                         <!-- JS Rendered Cart Items (Compact) -->
                         <div style="text-align:center; padding:30px; color:#999;">
                             尚未加入任何商品<br>
-                            <small>請從左側點擊商品加入，或使用上方「匯入 Excel」功能</small>
+                            <small>請從左側點擊商品加入採購清單</small>
                         </div>
                     </div>
                     <div class="b2b-footer">
@@ -2017,90 +2008,6 @@
                         </div>
                         <button class="b2b-btn-submit" onclick="openB2BSubmitModal()">
                             <i class="fas fa-paper-plane"></i> 提交詢價單
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- BOM Upload Modal -->
-    <div id="bom-upload-modal" class="hub-overlay hidden" style="background:rgba(0,0,0,0.5); z-index:10000;">
-        <div class="hub-container"
-            style="max-width:600px; background:white; padding:30px; border-radius:12px; text-align:left;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                <h3 style="margin:0;"><i class="fas fa-file-excel" style="color:#27ae60;"></i> 匯入 BOM 表</h3>
-                <button class="btn-xs" onclick="closeBOMUploadModal()"
-                    style="border:none; font-size:1.2rem; cursor:pointer;">&times;</button>
-            </div>
-
-            <div id="upload-step-1">
-                <div class="upload-area" id="drop-zone"
-                    style="border:2px dashed #ccc; padding:40px; text-align:center; border-radius:8px; cursor:pointer; background:#fafafa;">
-                    <i class="fas fa-cloud-upload-alt" style="font-size:3rem; color:#ccc; margin-bottom:15px;"></i>
-                    <p style="color:#666; margin-bottom:10px;">拖放 Excel 檔案至此，或點擊上傳</p>
-                    <input type="file" id="bom-file-input" accept=".xlsx, .xls" style="display:none;"
-                        onchange="handleFileSelect(this)">
-                    <button class="btn-xs btn-outline"
-                        onclick="document.getElementById('bom-file-input').click()">選擇檔案</button>
-                    <div style="margin-top:10px; font-size:0.8rem; color:#999;">
-                        支援格式: .xlsx, .xls |
-                        <a href="javascript:void(0)" onclick="downloadBOMTemplate()"
-                            style="color:#27ae60; text-decoration:underline;">下載範例範本 (.csv)</a>
-                    </div>
-                </div>
-            </div>
-
-            <div id="upload-step-2" style="display:none;">
-                <div style="margin-bottom:15px; font-weight:bold; color:#2c3e50; display:none !important;">
-                    欄位對應確認
-                    <span style="font-size:0.8rem; color:#e67e22; font-weight:normal; margin-left:10px;">
-                        <i class="fas fa-info-circle"></i> AI 已自動識別欄位
-                    </span>
-                </div>
-
-                <div
-                    style="background:#f8f9fa; padding:15px; border-radius:6px; margin-bottom:20px; display:none !important;">
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
-                        <div>
-                            <label style="font-size:0.8rem; display:block; color:#7f8c8d;">產品大類 (選填)</label>
-                            <select id="map-cat" class="detail-input"></select>
-                        </div>
-                        <div>
-                            <label style="font-size:0.8rem; display:block; color:#7f8c8d;">產品類型 (選填)</label>
-                            <select id="map-series" class="detail-input"></select>
-                        </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns: 1fr; gap:10px; margin-bottom:10px;">
-                        <div>
-                            <label style="font-size:0.8rem; display:block; color:#7f8c8d;">品項名稱 (必要)</label>
-                            <select id="map-name" class="detail-input"></select>
-                        </div>
-                    </div>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                        <div>
-                            <label style="font-size:0.8rem; display:block; color:#7f8c8d;">長度 (鋁材標註用)</label>
-                            <select id="map-len" class="detail-input"></select>
-                        </div>
-                        <div>
-                            <label style="font-size:0.8rem; display:block; color:#27ae60; font-weight:bold;">訂購數量
-                                (必要)</label>
-                            <select id="map-qty" class="detail-input" style="border-color:#27ae60;"></select>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="upload-preview"
-                    style="max-height:200px; overflow-y:auto; border:1px solid #eee; margin-bottom:20px; font-size:0.85rem;">
-                    <!-- Preview Table -->
-                </div>
-
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <div id="upload-stats" style="color:#666; font-size:0.9rem;"></div>
-                    <div style="display:flex; gap:10px;">
-                        <button class="btn-xs btn-outline" onclick="resetUpload()">重選檔案</button>
-                        <button class="btn-add-detail" onclick="processBOMImport()" style="width:auto; margin-top:0;">
-                            <i class="fas fa-file-import"></i> 確認匯入
                         </button>
                     </div>
                 </div>
