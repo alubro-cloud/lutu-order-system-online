@@ -700,290 +700,544 @@
             .hub-social-icon i { font-size: 18px !important; }
             .hub-footer { display: none !important; }
         }
+    <style>
+        /* ===========================================
+           ALUMIBRO HUB v6 — 冷色金屬高級重設計
+           頂欄 + Hero + 5 圖示線稿 + 底欄
+        =========================================== */
+        #hub-overlay.hub-overlay {
+            background: #2C3742 !important;
+            overflow: hidden !important;
+        }
+        /* 移除舊背景動畫 */
+        #hub-overlay .modern-geo-bg,
+        #hub-overlay .hub-iso-bg,
+        #hub-overlay .hub-bg-circle,
+        #hub-overlay .geo-long { display: none !important; }
+
+        /* === 主容器：頂欄 / 主體 / 底欄 三段式 === */
+        #hub-overlay .hub-container {
+            min-height: 100vh !important;
+            max-height: 100vh !important;
+            display: flex !important;
+            flex-direction: column !important;
+            padding: 0 !important;
+            gap: 0 !important;
+            overflow: hidden !important;
+            justify-content: flex-start !important;
+            align-items: stretch !important;
+            width: 100% !important;
+            max-width: none !important;
+        }
+
+        /* === 頂欄 === */
+        .alumibro-topbar {
+            background: #1f2730;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 42px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            flex-shrink: 0;
+        }
+        .alumibro-topbar-left {
+            color: rgba(255,255,255,0.5);
+            font-size: 12px;
+            letter-spacing: 1px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            white-space: nowrap;
+        }
+        .alumibro-topbar-left .short-addr { display: none; }
+        .alumibro-topbar-left span i {
+            margin-right: 5px;
+            color: rgba(255,255,255,0.65);
+            font-size: 12px;
+        }
+        .alumibro-topbar-right { display: flex; gap: 8px; align-items: center; }
+        .alumibro-topbar-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 13px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.75);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 4px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .alumibro-topbar-btn:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+        .alumibro-topbar-btn.primary {
+            background: #fff;
+            color: #2C3742;
+            border-color: #fff;
+            font-weight: 500;
+        }
+        .alumibro-topbar-btn.primary:hover {
+            background: #BEBEBE;
+            border-color: #BEBEBE;
+        }
+
+        /* === 主體：Hero + 服務 === */
+        .alumibro-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 30px 28px;
+            min-height: 0;
+        }
+        .alumibro-hero {
+            text-align: center;
+            margin-bottom: 26px;
+        }
+        .alumibro-eyebrow {
+            color: rgba(255,255,255,0.4);
+            font-size: 11px;
+            letter-spacing: 5px;
+            margin-bottom: 8px;
+        }
+        .alumibro-hero img.alumibro-logo-img {
+            max-width: 280px;
+            width: 60%;
+            height: auto;
+            display: block;
+            margin: 0 auto 8px;
+        }
+        .alumibro-tagline {
+            color: rgba(255,255,255,0.6);
+            font-size: 13px;
+            letter-spacing: 6px;
+        }
+        .alumibro-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 16px 0 26px;
+        }
+        .alumibro-divider .line {
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #BEBEBE, transparent);
+        }
+        .alumibro-divider .dot {
+            width: 4px;
+            height: 4px;
+            background: #BEBEBE;
+            transform: rotate(45deg);
+        }
+
+        /* === 服務區 === */
+        .alumibro-services {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 100%;
+        }
+        .alumibro-srv {
+            background: #2C3742;
+            padding: 28px 14px 22px;
+            cursor: pointer;
+            transition: background 0.25s;
+            text-align: center;
+            position: relative;
+        }
+        .alumibro-srv:hover { background: #1f2730; }
+        .alumibro-srv:hover svg { transform: translateY(-3px); }
+        .alumibro-srv-icon {
+            width: 54px;
+            height: 54px;
+            margin: 0 auto 16px;
+            color: rgba(255,255,255,0.9);
+        }
+        .alumibro-srv-icon svg {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        .alumibro-srv-tag {
+            color: rgba(255,255,255,0.4);
+            font-size: 9px;
+            letter-spacing: 2.5px;
+            margin-bottom: 5px;
+        }
+        .alumibro-srv-title {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+        .alumibro-srv-desc {
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+        .alumibro-srv-new {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            color: #2C3742;
+            font-size: 9px;
+            padding: 2px 7px;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        /* === 底欄 === */
+        .alumibro-footer {
+            background: #1f2730;
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            flex-shrink: 0;
+        }
+        .alumibro-footer-left {
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+        }
+        .alumibro-footer-left b {
+            color: #fff;
+            font-weight: 500;
+            margin-right: 10px;
+            letter-spacing: 2px;
+        }
+        .alumibro-footer-social {
+            display: flex;
+            gap: 20px;
+        }
+        .alumibro-footer-social a {
+            color: rgba(255,255,255,0.4);
+            font-size: 16px;
+            transition: color 0.2s;
+            text-decoration: none;
+        }
+        .alumibro-footer-social a:hover { color: #fff; }
+        .alumibro-footer-right {
+            color: rgba(255,255,255,0.25);
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* === 手機版 === */
+        @media (max-width: 768px) {
+            .alumibro-topbar {
+                padding: 0 10px;
+                height: 40px;
+            }
+            .alumibro-topbar-left {
+                font-size: 11px;
+                gap: 6px;
+            }
+            .alumibro-topbar-left .topbar-hide-mobile { display: none; }
+            .alumibro-topbar-left .full-addr { display: none; }
+            .alumibro-topbar-left .short-addr { display: inline-flex; align-items: center; }
+            .alumibro-topbar-btn {
+                font-size: 10.5px;
+                padding: 5px 9px;
+                letter-spacing: 0.5px;
+            }
+            .alumibro-topbar-btn .btn-text-hide-mobile { display: none; }
+            .alumibro-topbar-btn.icon-only {
+                width: 28px;
+                height: 28px;
+                padding: 0;
+                justify-content: center;
+            }
+            .alumibro-topbar-right { gap: 5px; }
+
+            .alumibro-main {
+                padding: 16px 12px 14px;
+                justify-content: flex-start;
+            }
+            .alumibro-hero { margin-bottom: 10px; }
+            .alumibro-eyebrow { font-size: 9px; letter-spacing: 3px; margin-bottom: 4px; }
+            .alumibro-hero img.alumibro-logo-img {
+                max-width: 180px;
+                width: 55%;
+                margin-bottom: 4px;
+            }
+            .alumibro-tagline { font-size: 10px; letter-spacing: 3px; }
+            .alumibro-divider { margin: 8px 0 12px; }
+            .alumibro-divider .line { width: 32px; }
+
+            /* 服務區：Grid 2 欄，featured 跨兩欄並排在第一位 */
+            .alumibro-services {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                overflow: visible;
+            }
+            .alumibro-srv {
+                background: rgba(255,255,255,0.03);
+                border: 1px solid rgba(255,255,255,0.1);
+                border-radius: 8px;
+                padding: 12px 10px 10px;
+            }
+            .alumibro-srv .alumibro-srv-arrow { display: none; }
+
+            /* NEW 卡片：橫跨兩欄 + 橫向排版 + 置頂 */
+            .alumibro-srv.featured {
+                grid-column: 1 / -1;
+                order: -1;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                text-align: left;
+                padding: 12px 14px;
+                background: rgba(255,255,255,0.05);
+                border: 1px solid rgba(255,255,255,0.14);
+            }
+            .alumibro-srv.featured .alumibro-srv-icon {
+                width: 42px;
+                height: 42px;
+                margin: 0;
+                flex-shrink: 0;
+            }
+            .alumibro-srv.featured .alumibro-srv-text { flex: 1; }
+            .alumibro-srv.featured .alumibro-srv-tag { font-size: 8px; margin-bottom: 1px; }
+            .alumibro-srv.featured .alumibro-srv-title { font-size: 14px; margin-bottom: 1px; }
+            .alumibro-srv.featured .alumibro-srv-desc { font-size: 9px; }
+            .alumibro-srv.featured .alumibro-srv-arrow {
+                display: block;
+                color: rgba(255,255,255,0.6);
+                font-size: 14px;
+                flex-shrink: 0;
+            }
+            .alumibro-srv.featured .alumibro-srv-new {
+                top: 6px;
+                right: 10px;
+                font-size: 8px;
+                padding: 1px 5px;
+            }
+
+            /* 其他 4 個小卡縮緊 */
+            .alumibro-srv-icon { width: 32px; height: 32px; margin: 0 auto 6px; }
+            .alumibro-srv-tag { font-size: 7px; letter-spacing: 1.5px; margin-bottom: 2px; }
+            .alumibro-srv-title { font-size: 12px; letter-spacing: 1.5px; margin-bottom: 1px; }
+            .alumibro-srv-desc { font-size: 8px; }
+
+            /* 底欄垂直堆疊（縮緊） */
+            .alumibro-footer {
+                flex-direction: column;
+                gap: 6px;
+                padding: 10px 14px;
+                text-align: center;
+            }
+            .alumibro-footer-left b { display: block; margin: 0 0 2px; font-size: 11px; }
+            .alumibro-footer-left { font-size: 9px; line-height: 1.5; }
+            .alumibro-footer-social { gap: 16px; font-size: 14px; }
+            .alumibro-footer-social a { font-size: 14px; }
+            .alumibro-footer-right { font-size: 8px; }
+
+            /* 整頁鎖死一屏，不捲動 */
+            #hub-overlay .hub-container {
+                height: 100vh !important;
+                min-height: 100vh !important;
+                max-height: 100vh !important;
+                overflow: hidden !important;
+            }
+        }
+
+        /* 桌機：featured 卡片的 arrow 隱藏（避免桌機橫向變形） */
+        @media (min-width: 769px) {
+            .alumibro-srv .alumibro-srv-arrow { display: none; }
+        }
     </style>
+
     <div id="hub-overlay" class="hub-overlay" style="background: #2C3742; overflow: hidden; z-index: 10;">
-        <!-- 暫停輪播圖
-        <div id="hub-slideshow" class="hub-slideshow-container"></div>
-        -->
-
-        <!-- 現代極簡：鋁擠型側面長條 (莫蘭迪色系) -->
-        <div class="modern-geo-bg">
-            <!-- 鋁擠橫條 1 (深灰) -->
-            <div class="geo-long geo-long-1" style="color: #9ca3af; height: 40px; top: 15%; animation-duration: 25s;">
-                <svg viewBox="0 0 1000 40" preserveAspectRatio="none" style="width: 100%; height: 100%;">
-                    <rect width="1000" height="40" fill="currentColor" opacity="0.8" rx="4" />
-                    <!-- 側面溝槽 -->
-                    <rect x="0" y="15" width="1000" height="10" fill="#ffffff" opacity="0.6" />
-                </svg>
-            </div>
-            
-            <!-- 鋁擠橫條 2 (中灰) -->
-            <div class="geo-long geo-long-2" style="color: #d1d5db; height: 60px; top: 45%; animation-duration: 30s;">
-                <svg viewBox="0 0 1000 60" preserveAspectRatio="none" style="width: 100%; height: 100%;">
-                    <rect width="1000" height="60" fill="currentColor" opacity="0.8" rx="6" />
-                    <rect x="0" y="15" width="1000" height="8" fill="#ffffff" opacity="0.6" />
-                    <rect x="0" y="37" width="1000" height="8" fill="#ffffff" opacity="0.6" />
-                </svg>
-            </div>
-            
-            <!-- 鋁擠橫條 3 (淺灰) -->
-            <div class="geo-long geo-long-3" style="color: #e5e7eb; height: 80px; bottom: 15%; animation-duration: 35s;">
-                <svg viewBox="0 0 1000 80" preserveAspectRatio="none" style="width: 100%; height: 100%;">
-                    <rect width="1000" height="80" fill="currentColor" opacity="0.8" rx="8" />
-                    <rect x="0" y="20" width="1000" height="12" fill="#ffffff" opacity="0.6" />
-                    <rect x="0" y="48" width="1000" height="12" fill="#ffffff" opacity="0.6" />
-                </svg>
-            </div>
-            
-            <!-- 莫蘭迪漸層光暈，增加空間感 -->
-            <div class="hub-bg-circle" style="position:absolute; top:-10%; right:-5%; width:40vw; height:40vw; border-radius:50%; background:radial-gradient(circle, rgba(179,199,217,0.5) 0%, rgba(250,250,250,0) 70%); pointer-events: none;"></div>
-            <div class="hub-bg-circle" style="position:absolute; bottom:-10%; left:-10%; width:50vw; height:50vw; border-radius:50%; background:radial-gradient(circle, rgba(230,217,198,0.4) 0%, rgba(250,250,250,0) 70%); pointer-events: none;"></div>
-
-            <!-- 工業櫃體幾何線框 (Isometric Cabinets - Expanded Layering) -->
-            <div class="hub-iso-bg">
-                <!-- 櫃體 A (中景) -->
-                <svg class="hub-iso-frame frame-1" viewBox="0 0 200 250" style="opacity:0.18;">
-                    <path d="M100 50 L160 80 L100 110 L40 80 Z" /> 
-                    <path d="M40 80 L40 200 L100 230 L100 110 Z" /> 
-                    <path d="M100 110 L100 230 L160 200 L160 80 Z" /> 
-                    <path d="M40 120 L100 150 L160 120" stroke-dasharray="4,2" /> 
-                    <path d="M40 160 L100 190 L160 160" stroke-dasharray="4,2" />
-                </svg>
-                <!-- 櫃體 B (遠景) -->
-                <svg class="hub-iso-frame frame-2" viewBox="0 0 200 250" style="opacity:0.08;">
-                    <path d="M100 30 L180 70 L100 110 L20 70 Z" /> 
-                    <path d="M20 70 L20 220 L100 260 L100 110 Z" />
-                    <path d="M100 110 L100 260 L180 220 L180 70 Z" />
-                </svg>
-                <!-- 櫃體 C (垂直高塔型 - 新增) -->
-                <svg class="hub-iso-frame" style="top:15%; left:75%; width:150px; opacity:0.12;" viewBox="0 0 100 300">
-                    <path d="M50 20 L85 40 L50 60 L15 40 Z" />
-                    <path d="M15 40 L15 260 L50 280 L50 60 Z" />
-                    <path d="M50 60 L50 280 L85 260 L85 40 Z" />
-                    <path d="M15 100 L50 120 L85 100" />
-                    <path d="M15 170 L50 190 L85 170" />
-                </svg>
-                <!-- 櫃體 D (工業工作站 - 新增) -->
-                <svg class="hub-iso-frame" style="bottom:15%; left:30%; width:300px; opacity:0.08;" viewBox="0 0 300 200">
-                    <path d="M60 60 L240 60 L240 85 L60 85 Z" fill="rgba(0,0,0,0.01)" /> 
-                    <path d="M60 85 L60 160 M240 85 L240 160 M150 85 L150 160" /> 
-                    <path d="M60 140 L240 140" stroke-dasharray="3,3" /> 
-                </svg>
-                <!-- 櫃體 E (精密複合模組 - 新增) -->
-                <svg class="hub-iso-frame" style="top:45%; right:35%; width:140px; opacity:0.05; filter:blur(1px);" viewBox="0 0 100 100">
-                    <path d="M10 10 L90 10 L90 90 L10 90 Z" />
-                    <circle cx="50" cy="50" r="30" stroke-dasharray="2,2" />
-                    <path d="M50 0 L50 100 M0 50 L100 50" />
-                </svg>
-            </div>
-        </div>
 
         <div class="hub-container">
 
-            <!-- LOGO 區 (ALUMIBRO 鋁材兄弟 - 反白版用於深底) -->
-            <div class="hub-logo-area">
-                <img src="assets/logo-white.png" alt="ALUMIBRO 鋁材兄弟" class="hub-img-logo" style="max-width: 320px; width: 70%; height: auto; display: block; margin: 0 auto;">
-            </div>
-
-            <!-- 細分隔線 -->
-            <div class="hub-divider-line"></div>
-
-            <!-- 卡片區 + 客製橫幅 共用 wrapper -->
-            <div class="hub-main">
-                <!-- 卡片區 -->
-                <div class="hub-cards">
-                    <!-- ===== 採購群 ===== -->
-                    <!-- 選料 (B2C) -->
-                    <div class="hub-card personal hub-group-purchase has-image" onclick="selectUserMode('B2C')">
-                        <div class="hub-card-image" style="background: linear-gradient(135deg, #ecdcb8 0%, #c9a572 100%);">
-                            <svg width="85%" height="80%" viewBox="0 0 100 80" preserveAspectRatio="xMidYMid meet">
-                                <rect x="10" y="14" width="70" height="5" fill="#5a431f" stroke="#fff" stroke-width="0.4" rx="0.5"/>
-                                <rect x="10" y="22" width="55" height="5" fill="#6e5530" stroke="#fff" stroke-width="0.4" rx="0.5"/>
-                                <rect x="10" y="30" width="45" height="5" fill="#5a431f" stroke="#fff" stroke-width="0.4" rx="0.5"/>
-                                <rect x="10" y="38" width="35" height="5" fill="#6e5530" stroke="#fff" stroke-width="0.4" rx="0.5"/>
-                                <rect x="10" y="46" width="58" height="5" fill="#5a431f" stroke="#fff" stroke-width="0.4" rx="0.5"/>
-                                <rect x="10" y="54" width="42" height="5" fill="#6e5530" stroke="#fff" stroke-width="0.4" rx="0.5"/>
-                                <rect x="10" y="14.5" width="70" height="1" fill="#fff" opacity="0.4"/>
-                                <rect x="10" y="22.5" width="55" height="1" fill="#fff" opacity="0.4"/>
-                                <rect x="10" y="30.5" width="45" height="1" fill="#fff" opacity="0.4"/>
-                                <rect x="10" y="38.5" width="35" height="1" fill="#fff" opacity="0.4"/>
-                                <rect x="10" y="46.5" width="58" height="1" fill="#fff" opacity="0.4"/>
-                                <rect x="10" y="54.5" width="42" height="1" fill="#fff" opacity="0.4"/>
-                                <g transform="translate(70,42)"><polygon points="0,0 14,0 14,14" fill="#3a2810" stroke="#fff" stroke-width="0.4"/><circle cx="10" cy="4" r="0.8" fill="#c9a572"/><circle cx="4" cy="10" r="0.8" fill="#c9a572"/></g>
-                                <g transform="translate(80,58)"><polygon points="0,0 12,0 12,12" fill="#3a4858" stroke="#fff" stroke-width="0.4"/></g>
-                                <g transform="translate(64,62)"><polygon points="0,0 11,0 11,11" fill="#2c3742" stroke="#fff" stroke-width="0.4"/></g>
-                            </svg>
-                            <div class="hub-card-series-tag personal-tag">MATERIALS</div>
-                        </div>
-                        <div class="hub-card-inner">
-                            <div class="hub-card-content">
-                                <h3>選料</h3>
-                                <p>個人 DIY · 少量精選</p>
-                            </div>
-                            <div class="hub-btn personal-btn">進入選購</div>
-                        </div>
-                    </div>
-
-                    <!-- 批料 (B2B) -->
-                    <div class="hub-card pro hub-group-purchase has-image" onclick="selectUserMode('B2B')">
-                        <div class="hub-card-image" style="background: linear-gradient(135deg, #ecdcb8 0%, #c9a572 100%);">
-                            <svg width="85%" height="80%" viewBox="0 0 100 80" preserveAspectRatio="xMidYMid meet">
-                                <g opacity="0.55">
-                                    <rect x="0" y="10" width="100" height="4" fill="#8a6533"/>
-                                    <rect x="0" y="16" width="100" height="4" fill="#6e5530"/>
-                                    <rect x="0" y="22" width="100" height="4" fill="#8a6533"/>
-                                    <rect x="0" y="28" width="100" height="4" fill="#6e5530"/>
-                                </g>
-                                <g transform="translate(20,30)">
-                                    <rect x="0" y="0" width="60" height="42" fill="#ffffff" stroke="#5a431f" stroke-width="0.5" rx="1"/>
-                                    <rect x="4" y="5" width="20" height="2" fill="#5a431f"/>
-                                    <line x1="4" y1="11" x2="56" y2="11" stroke="#a08566" stroke-width="0.4"/>
-                                    <line x1="4" y1="15" x2="40" y2="15" stroke="#a08566" stroke-width="0.4"/>
-                                    <line x1="4" y1="19" x2="50" y2="19" stroke="#a08566" stroke-width="0.4"/>
-                                    <line x1="4" y1="23" x2="45" y2="23" stroke="#a08566" stroke-width="0.4"/>
-                                    <line x1="4" y1="27" x2="52" y2="27" stroke="#a08566" stroke-width="0.4"/>
-                                    <line x1="4" y1="31" x2="48" y2="31" stroke="#a08566" stroke-width="0.4"/>
-                                    <rect x="4" y="35" width="20" height="3" fill="#b8864b" opacity="0.7"/>
-                                    <rect x="40" y="35" width="14" height="3" fill="#b8864b" opacity="0.7"/>
-                                </g>
-                            </svg>
-                            <div class="hub-card-series-tag pro-tag">WHOLESALE</div>
-                        </div>
-                        <div class="hub-card-inner">
-                            <div class="hub-card-content">
-                                <h3>批料</h3>
-                                <p>企業批量 · Excel 匯入</p>
-                            </div>
-                            <div class="hub-btn pro-btn">進入採購</div>
-                        </div>
-                    </div>
-
-                    <!-- 自家成品 (PRODUCTS) -->
-                    <div class="hub-card products hub-group-purchase has-image" onclick="selectUserMode('PRODUCTS')">
-                        <div class="hub-card-image" style="background: linear-gradient(135deg, #ecdcb8 0%, #c9a572 100%);">
-                            <svg width="90%" height="85%" viewBox="0 0 100 80" preserveAspectRatio="xMidYMid meet">
-                                <g transform="translate(6,16)">
-                                    <rect x="0" y="0" width="20" height="2" fill="#5a431f"/>
-                                    <rect x="0" y="6" width="14" height="2" fill="#5a431f"/>
-                                    <rect x="0" y="14" width="18" height="2" fill="#5a431f"/>
-                                    <rect x="0" y="22" width="20" height="12" fill="#a8804a"/>
-                                    <rect x="0" y="38" width="14" height="2" fill="#5a431f"/>
-                                    <rect x="0" y="42" width="20" height="2" fill="#5a431f"/>
-                                    <circle cx="3" cy="52" r="2" fill="#5a431f"/>
-                                    <circle cx="10" cy="52" r="2" fill="#5a431f"/>
-                                </g>
-                                <g transform="translate(36,38)">
-                                    <line x1="0" y1="0" x2="14" y2="0" stroke="#5a431f" stroke-width="0.8"/>
-                                    <polygon points="12,-2 16,0 12,2" fill="#5a431f"/>
-                                </g>
-                                <g transform="translate(56,18)" opacity="0.95">
-                                    <rect x="0" y="0" width="40" height="3" fill="#5a431f"/>
-                                    <line x1="2" y1="3" x2="0" y2="20" stroke="#5a431f" stroke-width="1"/>
-                                    <line x1="38" y1="3" x2="40" y2="20" stroke="#5a431f" stroke-width="1"/>
-                                    <rect x="-2" y="20" width="44" height="22" fill="#a8804a"/>
-                                    <rect x="-2" y="20" width="44" height="3" fill="#8a6533"/>
-                                    <circle cx="5" cy="44" r="2" fill="#5a431f"/>
-                                    <circle cx="35" cy="44" r="2" fill="#5a431f"/>
-                                </g>
-                            </svg>
-                            <div class="hub-card-series-tag products-tag">PRODUCTS</div>
-                            <div class="hub-card-new-badge">NEW</div>
-                        </div>
-                        <div class="hub-card-inner">
-                            <div class="hub-card-content">
-                                <h3>自家成品</h3>
-                                <p>首發：市集攤車</p>
-                            </div>
-                            <div class="hub-btn products-btn">瀏覽商品</div>
-                        </div>
-                    </div>
-
-                    <!-- ===== 服務群 ===== -->
-                    <!-- 客製專案 (CUSTOM) -->
-                    <div class="hub-card custom hub-group-service has-image" onclick="selectUserMode('CUSTOM')">
-                        <div class="hub-card-image" style="background: linear-gradient(135deg, #ecdcb8 0%, #c9a572 100%);">
-                            <svg width="90%" height="80%" viewBox="0 0 100 80" preserveAspectRatio="xMidYMid meet">
-                                <rect x="5" y="12" width="32" height="42" fill="#ffffff" opacity="0.92" rx="1"/>
-                                <rect x="9" y="20" width="22" height="14" fill="none" stroke="#5a431f" stroke-width="0.8"/>
-                                <line x1="9" y1="38" x2="20" y2="38" stroke="#5a431f" stroke-width="0.5"/>
-                                <line x1="9" y1="42" x2="25" y2="42" stroke="#5a431f" stroke-width="0.5"/>
-                                <line x1="9" y1="46" x2="22" y2="46" stroke="#5a431f" stroke-width="0.5"/>
-                                <text x="9" y="17" font-size="3" fill="#5a431f">SKETCH</text>
-                                <g transform="translate(40,30)">
-                                    <line x1="0" y1="2" x2="16" y2="2" stroke="#fff" stroke-width="1"/>
-                                    <polygon points="14,-1 18,2 14,5" fill="#fff"/>
-                                </g>
-                                <g transform="translate(60,15)">
-                                    <polygon points="0,15 15,7 30,15 30,32 15,40 0,32" fill="#a8804a" stroke="#fff" stroke-width="0.4"/>
-                                    <polygon points="0,15 15,22 30,15" fill="#8a6533" stroke="#fff" stroke-width="0.3"/>
-                                    <polygon points="15,22 30,15 30,32 15,40" fill="#5a431f" stroke="#fff" stroke-width="0.3"/>
-                                    <line x1="0" y1="15" x2="0" y2="32" stroke="#fff" stroke-width="0.3"/>
-                                    <line x1="15" y1="22" x2="15" y2="40" stroke="#fff" stroke-width="0.3"/>
-                                </g>
-                            </svg>
-                            <div class="hub-card-series-tag custom-tag">CUSTOM</div>
-                        </div>
-                        <div class="hub-card-inner">
-                            <div class="hub-card-content">
-                                <h3>客製專案</h3>
-                                <p>圖面 · CAD · 量身規劃</p>
-                            </div>
-                            <div class="hub-btn custom-btn">開始諮詢</div>
-                        </div>
-                    </div>
-
-                    <!-- 品牌藝廊 (GALLERY) -->
-                    <div class="hub-card info hub-group-service has-image" onclick="selectUserMode('INFO')">
-                        <div class="hub-card-image" style="background: linear-gradient(135deg, #ecdcb8 0%, #c9a572 100%);">
-                            <svg width="90%" height="85%" viewBox="0 0 100 80" preserveAspectRatio="xMidYMid meet">
-                                <rect x="5" y="5" width="28" height="36" fill="#ffffff" opacity="0.9" rx="1.5"/>
-                                <rect x="9" y="10" width="20" height="20" fill="#a8804a"/>
-                                <line x1="9" y1="32" x2="29" y2="32" stroke="#a08566" stroke-width="0.4"/>
-                                <line x1="9" y1="35" x2="22" y2="35" stroke="#a08566" stroke-width="0.4"/>
-                                <rect x="36" y="5" width="35" height="22" fill="#ffffff" opacity="0.9" rx="1.5"/>
-                                <rect x="40" y="9" width="27" height="14" fill="#c9a572"/>
-                                <rect x="74" y="5" width="22" height="28" fill="#ffffff" opacity="0.9" rx="1.5"/>
-                                <rect x="77" y="9" width="16" height="20" fill="#a8804a"/>
-                                <rect x="5" y="44" width="22" height="32" fill="#ffffff" opacity="0.9" rx="1.5"/>
-                                <rect x="8" y="48" width="16" height="22" fill="#5a431f"/>
-                                <rect x="30" y="30" width="40" height="46" fill="#ffffff" opacity="0.9" rx="1.5"/>
-                                <rect x="34" y="34" width="32" height="32" fill="#a8804a"/>
-                                <line x1="34" y1="68" x2="66" y2="68" stroke="#a08566" stroke-width="0.4"/>
-                                <line x1="34" y1="71" x2="55" y2="71" stroke="#a08566" stroke-width="0.4"/>
-                                <rect x="74" y="36" width="22" height="40" fill="#ffffff" opacity="0.9" rx="1.5"/>
-                                <rect x="77" y="40" width="16" height="28" fill="#6e5530"/>
-                            </svg>
-                            <div class="hub-card-series-tag info-tag">GALLERY</div>
-                        </div>
-                        <div class="hub-card-inner">
-                            <div class="hub-card-content">
-                                <h3>品牌藝廊</h3>
-                                <p>作品案例 · 品牌故事</p>
-                            </div>
-                            <div class="hub-btn info-btn">深入了解</div>
-                        </div>
-                    </div>
+            <!-- ============ 頂欄 ============ -->
+            <div class="alumibro-topbar">
+                <div class="alumibro-topbar-left">
+                    <span class="full-addr"><i class="fas fa-map-marker-alt"></i>412 台中市大里區仁美路 159 巷 11 號</span>
+                    <span class="short-addr"><i class="fas fa-map-marker-alt"></i>大里 · 仁美路</span>
+                    <span class="topbar-hide-mobile"><i class="fas fa-clock"></i>週一~週五 08:00–17:00</span>
+                </div>
+                <div class="alumibro-topbar-right">
+                    <a href="https://www.instagram.com/alumibro?igsh=MXhoY3lldHhlZHh3dw==" target="_blank" class="alumibro-topbar-btn icon-only" title="Instagram @alumibro">
+                        <i class="fab fa-instagram"></i><span class="btn-text-hide-mobile" style="margin-left:5px;">@alumibro</span>
+                    </a>
+                    <a href="https://line.me/ti/p/~herald8283" target="_blank" class="alumibro-topbar-btn primary">
+                        <i class="fab fa-line"></i> LINE 諮詢
+                    </a>
                 </div>
             </div>
 
-            <!-- Social Links 移至卡片下方 -->
-            <div class="hub-social-links">
-                <a href="https://line.me/ti/p/~herald8283" target="_blank" class="hub-social-icon"
-                    title="Line ID: herald8283"><i class="fab fa-line"></i></a>
-                <a href="https://www.threads.net/@lutu_alumi" target="_blank" class="hub-social-icon" title="Threads"><i
-                        class="fa-brands fa-threads"></i></a>
-                <a href="https://www.instagram.com/lutu_alumi?igsh=MXhoY3lldHhlZHh3dw==" target="_blank"
-                    class="hub-social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.herald-alu.com/" target="_blank" class="hub-social-icon" title="官方網站"><i class="fas fa-globe"></i></a>
-                <a href="https://www.google.com.tw/maps/place/412%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%A4%A7%E9%87%8C%E5%8D%80%E4%BB%81%E7%BE%8E%E8%B7%AF159%E5%B7%B711%E8%99%9F/@24.1031264,120.7076397,17z/data=!3m1!4b1!4m6!3m5!1s0x34693ccd618985a1:0x20c4b5c9ed633b6a!8m2!3d24.1031264!4d120.7102146!16s%2Fg%2F11f62nfj2j?entry=tts" target="_blank" class="hub-social-icon" title="Google 地圖"><i class="fas fa-map-marker-alt"></i></a>
-                <a href="javascript:void(0)" onclick="openCustomInquiry()" class="hub-social-icon" title="Email: alumibro@herald-alu.com"><i
-                        class="fas fa-envelope"></i></a>
+            <!-- ============ 主體 ============ -->
+            <div class="alumibro-main">
+
+                <!-- Hero 區 -->
+                <div class="alumibro-hero">
+                    <div class="alumibro-eyebrow">EST. TAICHUNG · TAIWAN</div>
+                    <img src="assets/logo-white.png" alt="ALUMIBRO 鋁材兄弟" class="alumibro-logo-img">
+                    <div class="alumibro-tagline">速度 · 精準 · 專業 · 信任</div>
+                </div>
+
+                <!-- 分隔線 -->
+                <div class="alumibro-divider">
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                    <div class="line"></div>
+                </div>
+
+                <!-- 5 個服務 -->
+                <div class="alumibro-services">
+
+                    <!-- 1. 選料 MATERIALS -->
+                    <div class="alumibro-srv" onclick="selectUserMode('B2C')">
+                        <div class="alumibro-srv-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="8" width="32" height="3" rx="0.5"/>
+                                <rect x="4" y="14" width="26" height="3" rx="0.5"/>
+                                <rect x="4" y="20" width="22" height="3" rx="0.5"/>
+                                <rect x="4" y="26" width="18" height="3" rx="0.5"/>
+                                <path d="M30 32 L38 36 L38 44 L30 40 Z"/>
+                                <path d="M30 32 L36 30 L44 34 L38 36"/>
+                                <path d="M44 34 L44 42 L38 44"/>
+                            </svg>
+                        </div>
+                        <div class="alumibro-srv-text">
+                            <div class="alumibro-srv-tag">MATERIALS</div>
+                            <div class="alumibro-srv-title">選料</div>
+                            <div class="alumibro-srv-desc">個人 DIY · 少量精選</div>
+                        </div>
+                        <div class="alumibro-srv-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+
+                    <!-- 2. 批料 WHOLESALE -->
+                    <div class="alumibro-srv" onclick="selectUserMode('B2B')">
+                        <div class="alumibro-srv-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="6" y="6" width="36" height="36" rx="2"/>
+                                <line x1="6" y1="16" x2="42" y2="16"/>
+                                <line x1="6" y1="26" x2="42" y2="26"/>
+                                <line x1="6" y1="36" x2="42" y2="36"/>
+                                <line x1="18" y1="6" x2="18" y2="42"/>
+                                <line x1="30" y1="6" x2="30" y2="42"/>
+                            </svg>
+                        </div>
+                        <div class="alumibro-srv-text">
+                            <div class="alumibro-srv-tag">WHOLESALE</div>
+                            <div class="alumibro-srv-title">批料</div>
+                            <div class="alumibro-srv-desc">企業批量 · Excel 匯入</div>
+                        </div>
+                        <div class="alumibro-srv-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+
+                    <!-- 3. 自家成品 PRODUCTS (NEW，手機橫向) -->
+                    <div class="alumibro-srv featured" onclick="selectUserMode('PRODUCTS')">
+                        <div class="alumibro-srv-new">NEW</div>
+                        <div class="alumibro-srv-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="6" y="14" width="36" height="4"/>
+                                <line x1="9" y1="18" x2="6" y2="36"/>
+                                <line x1="39" y1="18" x2="42" y2="36"/>
+                                <rect x="6" y="22" width="36" height="14"/>
+                                <line x1="6" y1="28" x2="42" y2="28"/>
+                                <circle cx="12" cy="40" r="3"/>
+                                <circle cx="36" cy="40" r="3"/>
+                                <line x1="18" y1="10" x2="18" y2="14"/>
+                                <line x1="30" y1="10" x2="30" y2="14"/>
+                            </svg>
+                        </div>
+                        <div class="alumibro-srv-text">
+                            <div class="alumibro-srv-tag">PRODUCTS</div>
+                            <div class="alumibro-srv-title">自家成品</div>
+                            <div class="alumibro-srv-desc">首發：市集攤車</div>
+                        </div>
+                        <div class="alumibro-srv-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+
+                    <!-- 4. 客製專案 CUSTOM -->
+                    <div class="alumibro-srv" onclick="selectUserMode('CUSTOM')">
+                        <div class="alumibro-srv-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="8" width="18" height="24" rx="1"/>
+                                <line x1="7" y1="14" x2="19" y2="14"/>
+                                <line x1="7" y1="18" x2="19" y2="18"/>
+                                <line x1="7" y1="24" x2="15" y2="24"/>
+                                <line x1="7" y1="28" x2="17" y2="28"/>
+                                <path d="M24 22 L30 18 L30 12"/>
+                                <polygon points="34,18 42,22 42,32 34,36 26,32 26,22"/>
+                                <line x1="34" y1="18" x2="34" y2="36"/>
+                                <line x1="26" y1="22" x2="34" y2="18"/>
+                                <line x1="42" y1="22" x2="34" y2="18"/>
+                            </svg>
+                        </div>
+                        <div class="alumibro-srv-text">
+                            <div class="alumibro-srv-tag">CUSTOM</div>
+                            <div class="alumibro-srv-title">客製專案</div>
+                            <div class="alumibro-srv-desc">圖面 · CAD · 量身規劃</div>
+                        </div>
+                        <div class="alumibro-srv-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+
+                    <!-- 5. 品牌藝廊 GALLERY -->
+                    <div class="alumibro-srv" onclick="selectUserMode('INFO')">
+                        <div class="alumibro-srv-icon">
+                            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="4" y="4" width="18" height="22" rx="1"/>
+                                <rect x="26" y="4" width="18" height="14" rx="1"/>
+                                <rect x="4" y="30" width="14" height="14" rx="1"/>
+                                <rect x="22" y="22" width="22" height="22" rx="1"/>
+                            </svg>
+                        </div>
+                        <div class="alumibro-srv-text">
+                            <div class="alumibro-srv-tag">GALLERY</div>
+                            <div class="alumibro-srv-title">品牌藝廊</div>
+                            <div class="alumibro-srv-desc">作品案例 · 品牌故事</div>
+                        </div>
+                        <div class="alumibro-srv-arrow"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="hub-footer" style="margin-top: 12px;">
+            <!-- ============ 底欄 ============ -->
+            <div class="alumibro-footer">
+                <div class="alumibro-footer-left">
+                    <b>鋅峰鋁業股份有限公司</b>鋁擠型專業製造 · 工業級品質保證
+                </div>
+                <div class="alumibro-footer-social">
+                    <a href="https://line.me/ti/p/~herald8283" target="_blank" title="Line ID: herald8283"><i class="fab fa-line"></i></a>
+                    <a href="https://www.threads.com/@alumibro" target="_blank" title="Threads"><i class="fa-brands fa-threads"></i></a>
+                    <a href="https://www.instagram.com/alumibro?igsh=MXhoY3lldHhlZHh3dw==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.herald-alu.com/" target="_blank" title="官方網站"><i class="fas fa-globe"></i></a>
+                    <a href="https://www.google.com.tw/maps/place/412%E5%8F%B0%E4%B8%AD%E5%B8%82%E5%A4%A7%E9%87%8C%E5%8D%80%E4%BB%81%E7%BE%8E%E8%B7%AF159%E5%B7%B711%E8%99%9F/@24.1031264,120.7076397,17z/" target="_blank" title="Google 地圖"><i class="fas fa-map-marker-alt"></i></a>
+                    <a href="javascript:void(0)" onclick="openCustomInquiry()" title="Email: alumibro@herald-alu.com"><i class="fas fa-envelope"></i></a>
+                </div>
+                <div class="alumibro-footer-right">© 2026 ALUMIBRO · All Rights Reserved</div>
             </div>
+
         </div>
     </div> <!-- Close #hub-overlay -->
+
 
     <div class="app-container">
         <!-- Mobile Hamburger Menu Button (B2C) - 桌機用 -->
@@ -1238,10 +1492,10 @@
                                     <a href="https://lin.ee/O1O2D4k" target="_blank" class="about-social-icon" title="官方 LINE 客服">
                                         <i class="fab fa-line"></i>
                                     </a>
-                                    <a href="https://www.instagram.com/lutu_alumi" target="_blank" class="about-social-icon" title="Instagram @lutu_alumi">
+                                    <a href="https://www.instagram.com/alumibro" target="_blank" class="about-social-icon" title="Instagram @alumibro">
                                         <i class="fab fa-instagram"></i>
                                     </a>
-                                    <a href="https://www.threads.net/@lutu_alumi" target="_blank" class="about-social-icon" title="Threads @lutu_alumi">
+                                    <a href="https://www.threads.com/@alumibro" target="_blank" class="about-social-icon" title="Threads @alumibro">
                                         <i class="fa-brands fa-threads"></i>
                                     </a>
                                     <a href="https://www.herald-alu.com/" target="_blank" class="about-social-icon" title="官方網站">
