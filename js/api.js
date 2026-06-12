@@ -83,17 +83,49 @@
     try {
       const res = await fetch(`${API_URL}?action=getInventory&t=${Date.now()}`);
       const json = await res.json();
-      let data = [];
-      if (Array.isArray(json)) data = json;
-      else if (json && Array.isArray(json.inventory)) data = json.inventory;
-      else if (json && Array.isArray(json.data)) data = json.data;
 
-      // API 回傳空 → 用 fallback
+      // v1 GAS 後台回的格式是 { products: [[header], [row], [row], ...] }（2D array）
+      // 第一 row 是 header，跳過。每 row 欄位順序：
+      // [0] type, [1] series, [2] name, [3] price,
+      // [4] img2d, [5] img3d, [6] unit, [7] status, [8] desc, [9] sku
+      let data = [];
+      if (json && Array.isArray(json.products)) {
+        let lastType = '';
+        let lastSeries = '';
+        data = json.products.slice(1).map(row => {
+          if (!row || row.length < 3) return null;
+          let type = row[0] || lastType;
+          let seriesRaw = row[1] || lastSeries;
+          if (row[0]) lastType = row[0];
+          if (row[1]) lastSeries = row[1];
+          const seriesNum = String(seriesRaw || '').replace('系列', '').trim();
+          return {
+            type: String(type || '').trim(),
+            series: seriesNum ? seriesNum + '系列' : '',
+            name: String(row[2] || '').trim(),
+            price: Number(row[3]) || 0,
+            img2d: row.length > 4 ? String(row[4] || '').trim() : '',
+            img3d: row.length > 5 ? String(row[5] || '').trim() : '',
+            unit: row.length > 6 ? String(row[6] || '').trim() : '',
+            status: row.length > 7 ? String(row[7] || '').trim() : '',
+            desc: row.length > 8 ? String(row[8] || '').trim() : '',
+            sku: row.length > 9 ? String(row[9] || '').trim() : '',
+          };
+        }).filter(p => p && p.name && p.status !== '下架');
+      } else if (Array.isArray(json)) {
+        data = json;
+      } else if (json && Array.isArray(json.inventory)) {
+        data = json.inventory;
+      } else if (json && Array.isArray(json.data)) {
+        data = json.data;
+      }
+
       if (data.length === 0) {
         console.warn('[api] 後台回傳空清單，改用 fallback');
         return getFallbackInventory();
       }
 
+      console.info(`[api] 從後台載入 ${data.length} 個商品`);
       cache.set(key, { data, timestamp: Date.now() });
       return data;
     } catch (e) {

@@ -1838,7 +1838,8 @@ body[data-view="b2b"] .cart-fab { display: flex; }
     gap: var(--space-5);
   }
   .products__info-row { grid-template-columns: 1fr; }
-  .products__hero-col { order: -1; }   /* 中間尺寸：圖移到上面 */
+  .products__hero-col { order: -1; }   /* hero 大圖排在 info-row 內最上面 */
+  .products__right { order: -1; }      /* 整個產品資訊+價格區排在 4 步驟之前 */
 }
 @media (max-width: 768px) {
   .assembly-grid { grid-template-columns: repeat(2, 1fr); }
