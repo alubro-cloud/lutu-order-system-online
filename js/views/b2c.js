@@ -40,14 +40,19 @@
     // 確保購物車元件已建立
     if (cartDrawer && cartDrawer.init) cartDrawer.init();
 
-    // 載入商品（有 cache）
-    let products = store.get('products');
-    if (!products || products.length === 0) {
-      const grid = root.querySelector('#b2c-grid');
-      grid.innerHTML = `<div class="b2c__empty">載入商品中…</div>`;
-      const list = await api.getInventory();
-      products = list.map(normalizeProduct).filter(Boolean);
-      store.set('products', products);
+    // 載入商品（有 cache）— 用 try/catch 避免 fetch 失敗讓整個 view 死掉
+    try {
+      let products = store.get('products');
+      if (!products || products.length === 0) {
+        const grid = root.querySelector('#b2c-grid');
+        if (grid) grid.innerHTML = `<div class="b2c__empty">載入商品中…</div>`;
+        const list = await api.getInventory();
+        products = (list || []).map(normalizeProduct).filter(Boolean);
+        store.set('products', products);
+      }
+    } catch (e) {
+      console.error('[b2c] 載入商品失敗:', e);
+      store.set('products', []);
     }
 
     bindNavTabs(root);
@@ -84,14 +89,20 @@
   }
 
   function bindNavTabs(root) {
-    root.querySelector('.b2c__main-tabs').addEventListener('click', (e) => {
+    const mainTabs = root.querySelector('.b2c__main-tabs');
+    const seriesTabs = root.querySelector('.b2c__series-tabs');
+    if (!mainTabs || !seriesTabs) {
+      console.warn('[b2c] tabs 元素不存在，跳過綁定');
+      return;
+    }
+    mainTabs.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-tab]');
       if (!btn) return;
       currentMainTab = btn.dataset.tab;
       setActive(root, '.b2c__main-tabs', btn);
       renderProducts(root);
     });
-    root.querySelector('.b2c__series-tabs').addEventListener('click', (e) => {
+    seriesTabs.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-series]');
       if (!btn) return;
       currentSeries = btn.dataset.series;

@@ -252,6 +252,8 @@
 
   // === 事件 ===
   function bindEvents(root, featured) {
+    const { lightbox } = window.ALU;
+
     // 大圖切換
     const heroBtns = root.querySelectorAll('[data-hero-step]');
     heroBtns.forEach(btn => {
@@ -266,6 +268,28 @@
         img.src = list[idx];
         img.dataset.index = idx;
         idxEl.textContent = idx + 1;
+      });
+    });
+
+    // 點 hero 大圖 → 開 lightbox
+    const heroImg = root.querySelector('#products-hero-img');
+    if (heroImg && lightbox) {
+      heroImg.style.cursor = 'zoom-in';
+      heroImg.addEventListener('click', () => {
+        lightbox.open({ img2d: heroImg.src, caption: featured.name });
+      });
+    }
+
+    // 點 assembly 圖 → 開 lightbox
+    root.querySelectorAll('.assembly-img-wrap').forEach((wrap, idx) => {
+      const item = (featured.assembly || [])[idx];
+      if (!item || !lightbox) return;
+      wrap.style.cursor = 'zoom-in';
+      wrap.addEventListener('click', () => {
+        lightbox.open({
+          img2d: item.img,
+          caption: `${item.step} · ${item.title}`,
+        });
       });
     });
 

@@ -176,3 +176,66 @@
   .b2c__grid { grid-template-columns: repeat(2, 1fr); }
   .checkout__layout { grid-template-columns: 1fr 300px; }
 }
+
+
+/* === Mobile 補充：B2C tabs / Orders / Products / 全 view 防爆框 === */
+@media (max-width: 768px) {
+  /* 全 view 防爆框（避免 viewport overflow） */
+  .view {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* B2C tabs 在 mobile 確保 active 樣式可見 */
+  .b2c__tab {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+  /* 預設未選中：暗底淺字 */
+  .b2c__tab:not(.b2c__tab--active) {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-secondary);
+  }
+  /* 選中：亮底深字（強對比） */
+  .b2c__tab--active {
+    background: var(--brand-white) !important;
+    color: var(--text-inverse) !important;
+  }
+
+  /* 訂單查詢 view mobile */
+  .orders {
+    padding: var(--space-3);
+    max-width: 100%;
+  }
+  .orders__header { gap: var(--space-3); flex-wrap: wrap; }
+  .orders__title { font-size: var(--fs-lg); }
+  .orders__search-row { grid-template-columns: 1fr; }
+  .orders__btn { width: 100%; justify-content: center; padding: var(--space-3); }
+  .order-card__head { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+  .order-card__head-right { width: 100%; justify-content: space-between; }
+  .order-item { grid-template-columns: 1fr auto; }
+  .order-item__meta { grid-column: 1 / -1; font-size: 11px; }
+
+  /* 自家成品 view mobile */
+  .products {
+    padding: 0 var(--space-3);
+    max-width: 100%;
+  }
+  .products__topbar { flex-wrap: wrap; gap: var(--space-2); }
+  .products__topbar-right { display: none; } /* mobile 隱藏右側 ALUMIBRO */
+  .products__name { font-size: 22px; }
+  .products__specs-grid { grid-template-columns: 1fr; } /* SPECS 改單欄省空間 */
+  .products__price-cta { flex-direction: column; align-items: stretch; gap: var(--space-3); }
+  .products__cta-line { justify-content: center; }
+
+  /* Checkout 配送 3 卡片在 mobile 改縱排（已有 form-options--cards 規則，加強對齊） */
+  .form-options--cards { grid-template-columns: 1fr; }
+
+  /* 圖片載入失敗 placeholder 在 mobile 字小一點 */
+  .product-card__no-image i { font-size: 24px; }
+}
+
+/* 平板 769-1080 products 兩欄改縱排 */
+@media (max-width: 1080px) and (min-width: 769px) {
+  .orders { padding: var(--space-5); }
+}
