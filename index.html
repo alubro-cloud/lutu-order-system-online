@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ALUMIBRO 鋁材兄弟 · 鋁擠型專業製造</title>
+  <meta name="description" content="鋅峰鋁業 ALUMIBRO 鋁材兄弟 · 鋁擠型材料供應 · 客製化加工 · 機械設計 · 專業諮詢">
+
+  <!-- Tabler Icons (純線稿 icon，跟品牌語言一致) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css">
+
+  <!-- 順序很重要：tokens → base → shell → views → responsive -->
+  <link rel="stylesheet" href="css/tokens.css?v=20261212aa">
+  <link rel="stylesheet" href="css/base.css?v=20261212aa">
+  <link rel="stylesheet" href="css/shell.css?v=20261212aa">
+  <link rel="stylesheet" href="css/views.css?v=20261212aa">
+  <link rel="stylesheet" href="css/responsive.css?v=20261212aa">
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- ============ 頂欄（所有頁面共用） ============ -->
+    <header class="app-topbar">
+      <a class="app-topbar__brand" href="#/" aria-label="回首頁">
+        <span class="app-topbar__brand-text">鋁材兄弟</span>
+        <span class="app-topbar__brand-sub">ALUMIBRO</span>
+      </a>
+
+      <nav class="app-topbar__nav" id="topbar-nav">
+        <!-- 當前 view 的次選單動態填入這裡 -->
+      </nav>
+
+      <div class="app-topbar__actions">
+        <a class="topbar-btn topbar-btn--icon"
+           href="https://www.instagram.com/alumibro?igsh=MXhoY3lldHhlZHh3dw=="
+           target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="ti ti-brand-instagram"></i>
+        </a>
+        <a class="topbar-btn topbar-btn--primary"
+           href="https://line.me/ti/p/~herald8283"
+           target="_blank" rel="noopener">
+          <i class="ti ti-brand-line"></i>
+          <span>LINE 諮詢</span>
+        </a>
+      </div>
+    </header>
+
+
+    <!-- ============ 主內容（router mount here） ============ -->
+    <main id="view-root" class="app-main"></main>
+
+
+    <!-- ============ 底欄（所有頁面共用） ============ -->
+    <footer class="app-footer">
+      <div class="app-footer__info">
+        <strong>鋅峰鋁業股份有限公司</strong>
+        <span>412 台中市大里區仁美路 159 巷 11 號 · 週一~週五 08:00–17:00</span>
+      </div>
+      <div class="app-footer__social">
+        <a href="https://line.me/ti/p/~herald8283" target="_blank" rel="noopener" aria-label="Line"><i class="ti ti-brand-line"></i></a>
+        <a href="https://www.threads.com/@alumibro" target="_blank" rel="noopener" aria-label="Threads"><i class="ti ti-brand-threads"></i></a>
+        <a href="https://www.instagram.com/alumibro?igsh=MXhoY3lldHhlZHh3dw==" target="_blank" rel="noopener" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+        <a href="https://www.herald-alu.com/" target="_blank" rel="noopener" aria-label="官網"><i class="ti ti-world"></i></a>
+        <a href="mailto:alumibro@herald-alu.com" data-copy="alumibro@herald-alu.com" aria-label="複製 Email"><i class="ti ti-mail"></i></a>
+      </div>
+      <div class="app-footer__copy">© 2026 ALUMIBRO · All Rights Reserved</div>
+    </footer>
+
+  </div>
+
+  <!-- 載入順序：lib → 基礎模組 → UI → views → 入口 -->
+  <script src="js/lib/format.js?v=20261212aa"></script>
+  <script src="js/lib/validation.js?v=20261212aa"></script>
+  <script src="js/lib/cutplan.js?v=20261212aa"></script>
+  <script src="js/api.js?v=20261212aa"></script>
+  <script src="js/state.js?v=20261212aa"></script>
+  <script src="js/router.js?v=20261212aa"></script>
+  <script src="js/ui/toast.js?v=20261212aa"></script>
+  <script src="js/ui/lightbox.js?v=20261212aa"></script>
+  <script src="js/ui/cart-drawer.js?v=20261212aa"></script>
+  <script src="js/views/hub.js?v=20261212aa"></script>
+  <script src="js/views/placeholder.js?v=20261212aa"></script>
+  <script src="js/views/b2c.js?v=20261212aa"></script>
+  <script src="js/views/b2c-checkout.js?v=20261212aa"></script>
+  <script src="js/views/orders.js?v=20261212aa"></script>
+  <script src="js/views/products.js?v=20261212aa"></script>
+  <script src="js/views/custom.js?v=20261212aa"></script>
+  <script src="js/views/gallery.js?v=20261212aa"></script>
+  <script src="js/app.js?v=20261212aa"></script>
+
+</body>
+</html>
