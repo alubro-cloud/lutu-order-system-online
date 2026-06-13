@@ -5,8 +5,8 @@
 
 :root {
   /* === 品牌色（PANTONE 18-4218 TCX 系統） === */
-  --brand-deep:        #2C3742;   /* 主背景 深藍灰 */
-  --brand-deep-darker: #1F2730;   /* 頂底欄 更深 */
+  --brand-deep:        #2C3742;   /* 卡片 hover 提亮用 */
+  --brand-deep-darker: #222B34;   /* 全站統一底色（body／頂底欄／抽屜／各 view 同色） */
   --brand-mid:         #4A5A6B;   /* PANTONE 主色 */
   --brand-black:       #111111;
   --brand-gray-dark:   #666666;
@@ -26,8 +26,9 @@
   --border-strong:     rgba(255,255,255,0.30);
 
   /* === 表面 === */
-  --surface-base:        var(--brand-deep);
+  --surface-base:        var(--brand-deep-darker);  /* body 與頂底欄同色 */
   --surface-raised:      var(--brand-deep-darker);
+  --surface-hover:       var(--brand-deep);          /* 卡片 hover 提亮 */
   --surface-card:        rgba(255,255,255,0.04);
   --surface-card-hover:  rgba(255,255,255,0.06);
   --surface-light:       #FFFFFF;

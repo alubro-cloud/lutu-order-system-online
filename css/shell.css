@@ -43,6 +43,18 @@
   padding-left: var(--space-3);
 }
 
+/* 子頁面：brand 變返回首頁 */
+.app-topbar__brand--back {
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+}
+.app-topbar__brand--back:hover { color: var(--text-primary); }
+.app-topbar__brand--back i { font-size: 18px; }
+.app-topbar__brand-back-text {
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tracking-wide);
+}
+
 .app-topbar__nav {
   flex: 1;
   display: flex;

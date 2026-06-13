@@ -216,26 +216,103 @@
   .order-item { grid-template-columns: 1fr auto; }
   .order-item__meta { grid-column: 1 / -1; font-size: 11px; }
 
-  /* 自家成品 view mobile */
-  .products {
-    padding: 0 var(--space-3);
-    max-width: 100%;
+  /* 自家成品 view mobile（無印風垂直堆疊 + 順序重排）
+     目標順序：① 名稱+描述 ② 大圖 ③ 價格 ④ SPECS ⑤ 4步驟
+     DOM: main > left(hero) + right > [header-row > header + assembly] + specs + price
+     用兩層 display:contents 把所有區塊攤平成 main 的 flex 子代，再用 order 排 */
+  .products--muji {
+    padding: var(--space-4) var(--space-4);
   }
-  .products__topbar { flex-wrap: wrap; gap: var(--space-2); }
-  .products__topbar-right { display: none; } /* mobile 隱藏右側 ALUMIBRO */
-  .products__name { font-size: 22px; }
-  .products__specs-grid { grid-template-columns: 1fr; } /* SPECS 改單欄省空間 */
-  .products__price-cta { flex-direction: column; align-items: stretch; gap: var(--space-3); }
-  .products__cta-line { justify-content: center; }
+  .products__main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .products__right,
+  .products__header-row {
+    display: contents;
+  }
+  /* 攤平後各區塊的順序 */
+  .products__header   { order: 1; }
+  .products__left     { order: 2; }   /* HERO 大圖 */
+  .products__price-cta { order: 3; }
+  .products__specs    { order: 4; }
+  .products__assembly { order: 5; }
 
-  /* Checkout 配送 3 卡片在 mobile 改縱排（已有 form-options--cards 規則，加強對齊） */
+  .products__name { font-size: 26px; }
+  .products__hero-wrap { min-height: 200px; }
+  .products__hero-img { max-height: 280px; }
+  .products__specs-groups { grid-template-columns: 1fr; gap: var(--space-4); }
+  .products__price-cta { gap: var(--space-3); }
+
+  /* assembly 4 縮圖一字排開 */
+  .assembly-grid { grid-template-columns: repeat(4, 1fr); }
+  .assembly-title { font-size: 11px; }
+
+  /* Lightbox mobile 調整 */
+  .assembly-lightbox { padding: var(--space-3); }
+  .assembly-lightbox__nav { width: 36px; height: 36px; font-size: 18px; }
+  .assembly-lightbox__nav--prev { left: var(--space-2); }
+  .assembly-lightbox__nav--next { right: var(--space-2); }
+  .assembly-lightbox__caption { padding: var(--space-2); }
+  .assembly-lightbox__title { font-size: 16px; }
+  .assembly-lightbox__desc { font-size: 12px; }
+
+  /* 其他產品列 mobile */
+  .other-row__thumb { width: 40px; height: 40px; }
+
+  /* Checkout 配送 3 卡片在 mobile 改縱排 */
   .form-options--cards { grid-template-columns: 1fr; }
-
-  /* 圖片載入失敗 placeholder 在 mobile 字小一點 */
   .product-card__no-image i { font-size: 24px; }
 }
 
 /* 平板 769-1080 products 兩欄改縱排 */
 @media (max-width: 1080px) and (min-width: 769px) {
   .orders { padding: var(--space-5); }
+}
+
+
+/* === Mobile: CUSTOM 客製專案 === */
+@media (max-width: 768px) {
+  .custom { padding: 0 var(--space-4); }
+  .custom__title { font-size: 26px; }
+  .custom__subtitle { font-size: var(--fs-sm); }
+  .custom__steps {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-top: var(--space-6);
+  }
+  .custom__baseline { display: none; }
+  .custom-step {
+    padding-right: 0;
+    padding-top: var(--space-5);
+    border-top: 0.5px solid rgba(190, 190, 190, 0.20);
+  }
+  .custom-step__node { display: none; }
+  .custom-step__num { font-size: 32px; }
+  .custom__cta {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .custom__cta-buttons { flex-direction: column; }
+  .custom__btn { justify-content: center; }
+}
+
+/* === Mobile: GALLERY 品牌藝廊 / 關於我們 === */
+@media (max-width: 768px) {
+  .gallery { min-height: auto; }
+  .gallery__photo { flex-basis: 30vh; min-height: 170px; }
+  .gallery__editorial {
+    padding: var(--space-6) var(--space-5);
+    align-items: flex-start;
+  }
+  .gallery__divider { margin-bottom: var(--space-6); }
+  .gallery__row {
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .gallery__titlecol { width: auto; }
+  .gallery__brand-en { font-size: 26px; letter-spacing: 5px; }
+  .gallery__p { font-size: var(--fs-sm); line-height: 1.9; }
 }
