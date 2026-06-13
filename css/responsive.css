@@ -1,0 +1,241 @@
+/* =====================================================
+   responsive.css — 手機版覆寫（≤ 768px）
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+  /* ============ 頂欄手機版 ============ */
+  .app-topbar {
+    height: var(--topbar-h-mobile);
+    padding: 0 var(--space-3);
+    gap: var(--space-3);
+  }
+  .app-topbar__brand-sub {
+    display: none;
+  }
+  .app-topbar__nav {
+    /* 手機暫時隱藏 nav（之後內頁次選單橫向滾動） */
+    display: none;
+  }
+
+  .topbar-btn {
+    font-size: 11px;
+    padding: 5px 9px;
+    letter-spacing: var(--tracking-tight);
+  }
+  .topbar-btn--primary span { display: none; }
+  .topbar-btn--primary {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    justify-content: center;
+  }
+  .topbar-btn--primary i { font-size: 16px; }
+
+
+  /* ============ Hub 手機版 ============ */
+  .hub {
+    padding: var(--space-4) var(--space-3);
+    justify-content: flex-start;
+  }
+  .hub__hero { margin-bottom: 0; }
+  .hub__eyebrow { font-size: 9px; letter-spacing: var(--tracking-wider); }
+  .hub__logo { max-width: 180px; width: 55%; }
+  .hub__logo-ch { font-size: 28px; letter-spacing: 8px; }
+  .hub__logo-ch::before,
+  .hub__logo-ch::after {
+    width: 18px;
+    bottom: 4px;
+  }
+  .hub__logo-ch::before { left: -24px; }
+  .hub__logo-ch::after  { right: -24px; }
+  .hub__logo-en { font-size: 9px; letter-spacing: 4px; }
+  .hub__tagline { font-size: 10px; letter-spacing: var(--tracking-wider); }
+  .hub__divider { margin: var(--space-3) 0 var(--space-4); }
+  .hub__divider-line { width: 32px; }
+
+  /* 服務區改 2 欄 + featured 跨欄 */
+  .hub__services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .service-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+  }
+  .service-card__icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: var(--space-2);
+  }
+  .service-card__title {
+    font-size: var(--fs-sm);
+    letter-spacing: var(--tracking-normal);
+  }
+  .service-card__tag { font-size: 7px; letter-spacing: 1.5px; }
+  .service-card__desc { font-size: 9px; }
+
+  /* NEW featured 卡片橫向跨欄置頂 */
+  .service-card--featured {
+    grid-column: 1 / -1;
+    order: -1;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--surface-card-hover);
+    border-color: var(--border-medium);
+  }
+  .service-card--featured .service-card__icon {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .service-card--featured .service-card__content {
+    flex: 1;
+  }
+  .service-card--featured .service-card__title {
+    font-size: var(--fs-base);
+    margin-bottom: 1px;
+  }
+  .service-card--featured .service-card__desc { font-size: 9px; }
+  .service-card--featured .service-card__arrow {
+    display: block;
+    font-size: var(--fs-md);
+    color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+  .service-card--featured .service-card__new {
+    top: var(--space-1);
+    right: var(--space-2);
+    font-size: 7px;
+    padding: 1px 5px;
+  }
+
+
+  /* ============ Placeholder 手機版 ============ */
+  .placeholder__title { font-size: var(--fs-xl); }
+  .placeholder__icon { font-size: 44px; }
+
+
+  /* ============ Footer 手機版 ============ */
+  .app-footer {
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+    padding: var(--space-3) var(--space-3);
+  }
+  .app-footer__info { gap: 2px; align-items: center; }
+  .app-footer__info strong { font-size: var(--fs-xs); }
+  .app-footer__info span { font-size: 9px; }
+  .app-footer__social { gap: var(--space-1); }
+  .app-footer__social a { width: 32px; height: 32px; font-size: 14px; }
+  .app-footer__copy { font-size: 9px; }
+}
+
+/* === B2C / Cart / Checkout 手機版 === */
+@media (max-width: 768px) {
+  .b2c { padding: var(--space-3); }
+  .b2c__nav { gap: var(--space-3); padding-bottom: var(--space-3); }
+  .b2c__back { width: 100%; }
+  .b2c__grid { grid-template-columns: 1fr; gap: var(--space-3); }
+
+  .product-card__dim-badge { top: 6px; left: 6px; padding: 2px 7px; font-size: 9px; }
+  .alu-row { grid-template-columns: 1fr 60px auto; }
+
+  .cart-fab {
+    width: 52px;
+    height: 52px;
+    bottom: var(--space-4);
+    right: var(--space-4);
+    font-size: 20px;
+  }
+  .cart-drawer__panel { width: 100vw; }
+
+  .checkout { padding: var(--space-3); }
+  .checkout__layout { grid-template-columns: 1fr; gap: var(--space-4); }
+  .checkout__summary {
+    position: static;
+    order: -1;
+  }
+  .checkout__items { max-height: 240px; }
+}
+
+/* 平板 769-1100 兩欄 */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .b2c__grid { grid-template-columns: repeat(2, 1fr); }
+  .checkout__layout { grid-template-columns: 1fr 300px; }
+}
+
+
+/* === Mobile 補充：B2C tabs / Orders / Products / 全 view 防爆框 === */
+@media (max-width: 768px) {
+  /* 全 view 防爆框（避免 viewport overflow） */
+  .view {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* B2C tabs 在 mobile 確保 active 樣式可見 */
+  .b2c__tab {
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+  /* 預設未選中：暗底淺字 */
+  .b2c__tab:not(.b2c__tab--active) {
+    background: rgba(255,255,255,0.06);
+    color: var(--text-secondary);
+  }
+  /* 選中：亮底深字（強對比） */
+  .b2c__tab--active {
+    background: var(--brand-white) !important;
+    color: var(--text-inverse) !important;
+  }
+
+  /* 訂單查詢 view mobile */
+  .orders {
+    padding: var(--space-3);
+    max-width: 100%;
+  }
+  .orders__header { gap: var(--space-3); flex-wrap: wrap; }
+  .orders__title { font-size: var(--fs-lg); }
+  .orders__search-row { grid-template-columns: 1fr; }
+  .orders__btn { width: 100%; justify-content: center; padding: var(--space-3); }
+  .order-card__head { flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+  .order-card__head-right { width: 100%; justify-content: space-between; }
+  .order-item { grid-template-columns: 1fr auto; }
+  .order-item__meta { grid-column: 1 / -1; font-size: 11px; }
+
+  /* 自家成品 view mobile */
+  .products {
+    padding: 0 var(--space-3);
+    max-width: 100%;
+  }
+  .products__topbar { flex-wrap: wrap; gap: var(--space-2); }
+  .products__topbar-right { display: none; } /* mobile 隱藏右側 ALUMIBRO */
+  .products__name { font-size: 22px; }
+  .products__specs-grid { grid-template-columns: 1fr; } /* SPECS 改單欄省空間 */
+  .products__price-cta { flex-direction: column; align-items: stretch; gap: var(--space-3); }
+  .products__cta-line { justify-content: center; }
+
+  /* Checkout 配送 3 卡片在 mobile 改縱排（已有 form-options--cards 規則，加強對齊） */
+  .form-options--cards { grid-template-columns: 1fr; }
+
+  /* 圖片載入失敗 placeholder 在 mobile 字小一點 */
+  .product-card__no-image i { font-size: 24px; }
+}
+
+/* 平板 769-1080 products 兩欄改縱排 */
+@media (max-width: 1080px) and (min-width: 769px) {
+  .orders { padding: var(--space-5); }
+}

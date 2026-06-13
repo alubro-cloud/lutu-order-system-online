@@ -1,0 +1,184 @@
+/* =====================================================
+   shell.css — App Shell: 頂欄 / 主內容 / 底欄
+   每個 view 共用這個殼
+   ===================================================== */
+
+/* ============ 頂欄 ============ */
+.app-topbar {
+  height: var(--topbar-h);
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 0 var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-topbar);
+}
+
+.app-topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.app-topbar__brand-text {
+  font-size: var(--fs-md);
+  font-weight: 900;
+  font-style: italic;
+  transform: skewX(-12deg);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-primary);
+  display: inline-block;
+}
+
+.app-topbar__brand-sub {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wider);
+  color: var(--text-muted);
+  border-left: 1px solid var(--border-medium);
+  padding-left: var(--space-3);
+}
+
+.app-topbar__nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-2);
+  min-width: 0;
+  overflow-x: auto;
+  /* 隱藏 scrollbar */
+  scrollbar-width: none;
+}
+.app-topbar__nav::-webkit-scrollbar { display: none; }
+
+.app-topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* === topbar 按鈕 === */
+.topbar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tracking-normal);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+  white-space: nowrap;
+}
+.topbar-btn:hover {
+  border-color: var(--brand-white);
+  color: var(--brand-white);
+}
+.topbar-btn--icon {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  justify-content: center;
+}
+.topbar-btn--icon i {
+  font-size: 16px;
+}
+.topbar-btn--primary {
+  background: var(--brand-white);
+  color: var(--text-inverse);
+  border-color: var(--brand-white);
+  font-weight: 500;
+}
+.topbar-btn--primary:hover {
+  background: var(--brand-gray-light);
+  border-color: var(--brand-gray-light);
+  color: var(--text-inverse);
+}
+
+/* === topbar 返回按鈕（內頁通用） === */
+.topbar-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  letter-spacing: var(--tracking-normal);
+  transition: var(--transition-fast);
+}
+.topbar-back:hover {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+/* ============ 主內容 ============ */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* ============ 底欄 ============ */
+.app-footer {
+  background: var(--surface-raised);
+  border-top: 1px solid var(--border-soft);
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  flex-shrink: 0;
+}
+
+.app-footer__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  letter-spacing: var(--tracking-tight);
+}
+.app-footer__info strong {
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+}
+
+.app-footer__social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+/* 每個社群連結都是 36x36 的明確點擊區，圖標居中 */
+.app-footer__social a {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 16px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+.app-footer__social a:hover {
+  color: var(--brand-white);
+  background: var(--surface-card);
+}
+
+.app-footer__copy {
+  font-size: var(--fs-xs);
+  color: var(--text-faint);
+  letter-spacing: var(--tracking-tight);
+  text-align: right;
+}

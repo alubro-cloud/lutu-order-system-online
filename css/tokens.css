@@ -1,0 +1,91 @@
+/* =====================================================
+   tokens.css — 設計變數中心
+   未來要改色 / 字級 / 間距 ➡ 只動這個檔案
+   ===================================================== */
+
+:root {
+  /* === 品牌色（PANTONE 18-4218 TCX 系統） === */
+  --brand-deep:        #2C3742;   /* 主背景 深藍灰 */
+  --brand-deep-darker: #1F2730;   /* 頂底欄 更深 */
+  --brand-mid:         #4A5A6B;   /* PANTONE 主色 */
+  --brand-black:       #111111;
+  --brand-gray-dark:   #666666;
+  --brand-gray-light:  #BEBEBE;   /* 鋁色強調 */
+  --brand-white:       #FFFFFF;
+
+  /* === 文字色階 === */
+  --text-primary:      rgba(255,255,255,0.92);
+  --text-secondary:    rgba(255,255,255,0.60);
+  --text-muted:        rgba(255,255,255,0.40);
+  --text-faint:        rgba(255,255,255,0.25);
+  --text-inverse:      #2C3742;
+
+  /* === 邊框 / 分隔 === */
+  --border-soft:       rgba(255,255,255,0.08);
+  --border-medium:     rgba(255,255,255,0.15);
+  --border-strong:     rgba(255,255,255,0.30);
+
+  /* === 表面 === */
+  --surface-base:        var(--brand-deep);
+  --surface-raised:      var(--brand-deep-darker);
+  --surface-card:        rgba(255,255,255,0.04);
+  --surface-card-hover:  rgba(255,255,255,0.06);
+  --surface-light:       #FFFFFF;
+
+  /* === 白色卡片配色（B2C 商品卡用） === */
+  --card-bg:             #FFFFFF;
+  --card-bg-soft:        #F4F5F7;       /* 圖區/輸入區淺底 */
+  --card-text:           #1F2730;        /* 主文字深色 */
+  --card-text-secondary: #5F6770;        /* 次文字 */
+  --card-text-muted:     #9CA3AF;        /* 弱文字 */
+  --card-border:         #E5E7EB;        /* 卡片邊框 */
+  --card-divider:        #EDEEF1;        /* 圖區分隔線 */
+
+  /* === 字型 === */
+  --font-base: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+
+  /* === 字級 === */
+  --fs-xs:    10px;
+  --fs-sm:    12px;
+  --fs-base:  14px;
+  --fs-md:    16px;
+  --fs-lg:    18px;
+  --fs-xl:    24px;
+  --fs-2xl:   32px;
+  --fs-3xl:   40px;
+
+  /* === 字距 === */
+  --tracking-tight:   0.5px;
+  --tracking-normal:  1px;
+  --tracking-wide:    2px;
+  --tracking-wider:   4px;
+  --tracking-widest:  8px;
+
+  /* === 間距 (4px scale) === */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* === 圓角 === */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   14px;
+  --radius-full: 9999px;
+
+  /* === 過渡 === */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+
+  /* === 佈局 === */
+  --topbar-h:        56px;
+  --topbar-h-mobile: 48px;
+  --z-topbar:        100;
+  --z-modal:         500;
+  --z-toast:         800;
+}
