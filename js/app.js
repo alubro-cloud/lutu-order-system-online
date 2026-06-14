@@ -26,8 +26,7 @@
     .register('orders',       views.mountOrders)
     .register('b2b',          views.mountB2C)        // 舊連結相容：b2b 直接導去 b2c
     .register('products',     views.mountProducts)
-    .register('custom',       views.mountCustom)
-    .register('gallery',      views.mountGallery);
+    .register('custom',       views.mountCustom);
 
   // === 全域 click handler：[data-copy] 點擊複製文字 + 不擋 mailto: ===
   document.addEventListener('click', (e) => {

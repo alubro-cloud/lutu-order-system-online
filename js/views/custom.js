@@ -17,7 +17,7 @@
       desc: '備妥您的需求說明與任何可參考的圖面，越完整越能加快規劃。',
       items: [
         { icon: 'ti-file-description', label: '尺寸草圖' },
-        { icon: 'ti-file-3d',          label: 'CAD 檔' },
+        { icon: 'ti-file-3d',          label: 'CAD · STEP · 3D 檔' },
         { icon: 'ti-camera',           label: '現場參考照' },
       ],
     },
@@ -47,7 +47,7 @@
 【聯絡人 & 電話】
 
 【需求描述 / 用途】
-（如有圖面、CAD 或參考照片，請一併附件）
+（如有圖面、CAD／STEP／SolidWorks 等 3D 檔或參考照片，請一併附件）
 
 【預計數量】
 
@@ -99,7 +99,7 @@
 
         <div class="custom__note">
           <i class="ti ti-info-circle"></i>
-          沒有 CAD 圖也沒關係 — 手繪草圖、口頭描述或現場照片都可以，我們會協助釐清規格。
+          沒有 CAD 圖也沒關係 — 手繪草圖、口頭描述或現場照片都可以；若有 CAD、STEP、SolidWorks 等 3D 檔更佳，我們會協助釐清規格。
         </div>
 
       </div>
