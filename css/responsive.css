@@ -14,8 +14,14 @@
     display: none;
   }
   .app-topbar__nav {
-    /* 手機暫時隱藏 nav（之後內頁次選單橫向滾動） */
-    display: none;
+    /* 顯示頂欄次選單（產品切換）；放不下時可橫向捲動 */
+    display: flex;
+  }
+  .topbar-switch { gap: 6px; }
+  .topbar-switch__btn {
+    padding: 4px 10px;
+    font-size: 11px;
+    letter-spacing: 0;
   }
 
   .topbar-btn {
@@ -223,6 +229,7 @@
 
   /* assembly 4 縮圖一字排開 */
   .assembly-grid { grid-template-columns: repeat(4, 1fr); }
+  .assembly-grid--5 { grid-template-columns: repeat(3, 1fr); }
   .assembly-title { font-size: 11px; }
 
   /* Lightbox mobile 調整 */

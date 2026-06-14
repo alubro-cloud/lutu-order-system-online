@@ -1740,6 +1740,13 @@ body[data-view="b2b"] .cart-fab { display: flex; }
   overflow: hidden;
 }
 .assembly-img { width: 100%; height: 100%; object-fit: contain; }
+.assembly-img--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muji-faint);
+  font-size: 26px;
+}
 .assembly-step-badge {
   position: absolute;
   top: 3px; left: 3px;
@@ -1805,6 +1812,13 @@ body[data-view="b2b"] .cart-fab { display: flex; }
   align-items: start;
 }
 .spec-group { min-width: 0; }
+/* 寬版分組：橫跨兩欄、內部項目再分兩欄（縮短高度） */
+.spec-group--wide { grid-column: span 2; }
+.spec-group--wide .spec-group__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2) var(--space-5);
+}
 .spec-group__label {
   font-size: 10px;
   letter-spacing: 2px;
@@ -2045,6 +2059,36 @@ body[data-view="b2b"] .cart-fab { display: flex; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-3);
+}
+/* 5 步驟 → 5 欄 */
+.assembly-grid--5 { grid-template-columns: repeat(5, 1fr); }
+
+/* 產品切換膠囊（放在頂欄 #topbar-nav） */
+.topbar-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.topbar-switch__btn {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: var(--fs-xs);
+  letter-spacing: 0.5px;
+  padding: 5px var(--space-3);
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.topbar-switch__btn:hover { color: var(--text-primary); border-color: var(--brand-gray-light); }
+.topbar-switch__btn.is-active {
+  background: var(--surface-hover);
+  border-color: var(--brand-gray-light);
+  color: var(--text-primary);
+  font-weight: 700;
 }
 .assembly-card {
   display: flex;

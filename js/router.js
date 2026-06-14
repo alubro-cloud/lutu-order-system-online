@@ -36,6 +36,8 @@
       const root = document.getElementById(ROOT_ID);
       if (!root) return;
       root.innerHTML = '';
+      const tnav = document.getElementById('topbar-nav');
+      if (tnav) tnav.innerHTML = '';
       root.dataset.view = name;
       // body[data-view] 用於 CSS 條件樣式（譬如 cart FAB 只在 b2c/b2b 顯示）
       const baseView = name.split('/')[0];

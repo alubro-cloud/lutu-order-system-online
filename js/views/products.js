@@ -7,6 +7,44 @@
 (function (global) {
   'use strict';
 
+  // === 智能圖片探測 ===
+  // 不寫死副檔名：依序試 jpg/png/webp，抓得到才回傳，全部抓不到回 null
+  const IMG_EXTS = ['jpg', 'jpeg', 'png', 'webp'];
+  function resolveOne(base) {
+    return new Promise(resolve => {
+      if (!base) { resolve(null); return; }
+      if (/\.(jpe?g|png|webp|gif|avif)$/i.test(base)) {
+        const im = new Image();
+        im.onload = () => resolve(base);
+        im.onerror = () => resolve(null);
+        im.src = base;
+        return;
+      }
+      let i = 0;
+      const next = () => {
+        if (i >= IMG_EXTS.length) { resolve(null); return; }
+        const url = `${base}.${IMG_EXTS[i++]}`;
+        const im = new Image();
+        im.onload = () => resolve(url);
+        im.onerror = next;
+        im.src = url;
+      };
+      next();
+    });
+  }
+  // 連號探測：prefix + 1..max，缺號自動跳過、數量自適應
+  async function resolveSeries(prefix, max = 10) {
+    if (!prefix) return [];
+    const bases = Array.from({ length: max }, (_, i) => `${prefix}${i + 1}`);
+    const urls = await Promise.all(bases.map(resolveOne));
+    return urls.filter(Boolean);
+  }
+  // 明確清單探測（去副檔名亦可）
+  async function resolveList(bases) {
+    const urls = await Promise.all((bases || []).map(resolveOne));
+    return urls.filter(Boolean);
+  }
+
   // === 產品資料（未來加產品在這裡擴展） ===
   const PRODUCTS = [
     {
@@ -17,28 +55,22 @@
       nameEn: 'MARKET CART',
       subtitle: '模組化擺攤工作站',
       description: '鋁擠型框架 + 樺木板。<br>三段式拆解，連 Sienta 都能載走。',
-      hero: [
-        'assets/shop1.png',
-        'assets/shop2.png',
-        'assets/shop3.png',
-        'assets/shop4.png',
-        'assets/shop5.png',
-      ],
+      gallery: 'assets/shop',
       assembly: [
         {
-          step: '01', title: '下半櫃體', img: 'assets/car1.png',
+          step: '01', title: '下半櫃體', img: 'assets/car1',
           desc: '底座搭配 4 顆重型腳輪，結合 7mm 合板側板，以 M8 螺絲 + 三角連結塊組成穩固底盤，可推可鎖。'
         },
         {
-          step: '02', title: '上半櫃體', img: 'assets/car2.png',
+          step: '02', title: '上半櫃體', img: 'assets/car2',
           desc: '疊上 18mm 合板桌面，延續三角連結塊模組化結構，零件全可拆解，工作檯面可外推延伸。'
         },
         {
-          step: '03', title: '傘架立起', img: 'assets/car3.png',
+          step: '03', title: '傘架立起', img: 'assets/car3',
           desc: '從櫃頂立起鋁擠型折疊傘架，採用 180° 連接件 (M6 軸心、M8 兩端固定)，關節可旋轉，單手即可撐起。'
         },
         {
-          step: '04', title: '完成擺攤', img: 'assets/car4.png',
+          step: '04', title: '完成擺攤', img: 'assets/car4',
           desc: '撐開雨棚帆布與側翼桌板，雙翼各 80 cm 對稱遮陽。整套收摺後連 Sienta 都能載走。'
         },
       ],
@@ -69,34 +101,118 @@
     {
       id: 'phone-stand',
       featured: false,
-      status: 'preview',  // 圖還沒定案
-      name: '手機架',
+      status: 'available',
+      name: '鋁製手機架',
       nameEn: 'PHONE STAND',
-      subtitle: '',
-      description: '鋁擠型 + 配件組合的桌上型手機架。',
-      hero: [
-        'assets/phone1.png',
+      subtitle: 'DIY 組裝套件',
+      description: '2020 鋁擠型 DIY 套件・零件與工具全附。<br>跟著 5 步驟鎖一鎖，桌上型手機架輕鬆完成。',
+      gallery: 'assets/phone-kit',
+      assembly: [
+        {
+          step: '01', title: '組裝橫向底座', img: 'assets/phone-s1',
+          desc: '取 2020 鋁材組成橫向底座，兩端壓上端蓋，以 M4 螺絲＋螺母先輕鎖固定。'
+        },
+        {
+          step: '02', title: '組裝直向底座', img: 'assets/phone-s2',
+          desc: '立起直向鋁材，用三角連結塊與底座接合；組裝時先固定螺絲、暫不鎖死，方便後續微調。'
+        },
+        {
+          step: '03', title: '組裝支撐', img: 'assets/phone-s3',
+          desc: '加上支撐臂，以三角連結塊撐出手機架的傾斜角度。'
+        },
+        {
+          step: '04', title: '組裝上橫樑', img: 'assets/phone-s4',
+          desc: '裝上最上方橫樑（承放手機的那一段），確認方向與位置。'
+        },
+        {
+          step: '05', title: '組裝完成', img: 'assets/phone-s5',
+          desc: '完成後再微調角度，並確認所有螺絲都鎖緊，即可使用。'
+        },
       ],
-      // 未來補：assembly[], specs[], pricing{}
+      specs: [
+        { group: '整包內含', wide: true, items: [
+          { label: '2020 鋁材（60mm）', value: '× 4' },
+          { label: '三角連結塊',       value: '× 5' },
+          { label: '端蓋',             value: '× 5' },
+          { label: 'M4 螺絲',          value: '× 12' },
+          { label: 'M4 螺母',          value: '× 12' },
+          { label: 'M4 墊片',          value: '× 10' },
+        ]},
+        { group: '附贈工具', items: [
+          { label: 'M4 六角板手', value: '× 1', gift: true },
+        ]},
+      ],
+      pricing: {
+        original: 250,
+        current: 200,
+        note: '特價・整包零件與工具全附<br>自取・含稅・配送請洽 LINE',
+      },
+      lineUrl: 'https://line.me/ti/p/~herald8283',
     },
   ];
 
+  let currentId = null;
+
   // === Mount ===
   function mount(root) {
-    const featured = PRODUCTS.find(p => p.featured) || PRODUCTS[0];
-    const others = PRODUCTS.filter(p => p.id !== featured.id);
+    const def = PRODUCTS.find(p => p.featured) || PRODUCTS[0];
+    renderPage(root, def.id);
+  }
+
+  async function renderPage(root, selectedId) {
+    currentId = selectedId;
+    const selected = PRODUCTS.find(p => p.id === selectedId) || PRODUCTS[0];
+    const others = PRODUCTS.filter(p => p.id !== selected.id);
+
+    // 智能解析：輪播圖（連號探測）＋ 組裝圖（去副檔名探測）
+    const [heroList, assemblyResolved] = await Promise.all([
+      selected.gallery ? resolveSeries(selected.gallery) : resolveList(selected.hero || []),
+      Promise.all((selected.assembly || []).map(async a => ({ ...a, img: await resolveOne(a.img) }))),
+    ]);
+
+    // 切換太快時，丟棄過期的結果
+    if (currentId !== selectedId) return;
+
+    const view = { ...selected, hero: heroList, assembly: assemblyResolved };
 
     root.innerHTML = `
       <div class="products products--muji view">
-        ${renderFeatured(featured, others)}
+        ${renderFeatured(view, others)}
       </div>
     `;
 
-    bindEvents(root, featured);
+    bindEvents(root, view);
+    mountTopbarSwitch(root, selectedId);
+  }
+
+  // === 產品切換：填進頂欄 #topbar-nav（多個可販售產品時才出現）===
+  function mountTopbarSwitch(root, selectedId) {
+    const nav = document.getElementById('topbar-nav');
+    if (!nav) return;
+    const sellable = PRODUCTS.filter(p => p.status === 'available');
+    if (sellable.length < 2) { nav.innerHTML = ''; return; }
+    nav.innerHTML = `
+      <div class="topbar-switch">
+        ${sellable.map(p => `
+          <button class="topbar-switch__btn${p.id === selectedId ? ' is-active' : ''}" data-switch="${p.id}">${p.name}</button>
+        `).join('')}
+      </div>
+    `;
+    nav.querySelectorAll('[data-switch]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.switch;
+        if (id !== currentId) {
+          renderPage(root, id);
+          root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   }
 
   // === 主秀：攤車詳情頁（無印風 B1）===
   function renderFeatured(p, others) {
+    // 下方「其他自家成品」只列「準備中」的（可販售的已在上方切換，不重複）
+    const upcoming = (others || []).filter(o => o.status !== 'available');
     return `
       <div class="products__main">
         <div class="products__left">
@@ -116,7 +232,7 @@
 
             <div class="products__assembly">
               <div class="products__assembly-label">ASSEMBLY · 點縮圖看細節</div>
-              <div class="assembly-grid">
+              <div class="assembly-grid assembly-grid--${(p.assembly || []).length}">
                 ${(p.assembly || []).map(renderAssemblyCard).join('')}
               </div>
             </div>
@@ -128,7 +244,7 @@
         </div>
       </div>
 
-      ${others && others.length > 0 ? renderOthers(others) : ''}
+      ${upcoming.length > 0 ? renderOthers(upcoming) : ''}
     `;
   }
 
@@ -137,8 +253,10 @@
       <div class="assembly-card" role="button" tabindex="0">
         <div class="assembly-img-wrap">
           <span class="assembly-step-badge">${a.step}</span>
-          <img src="${a.img}" alt="${a.title}" loading="lazy"
-               onerror="window.ALU.imgFail(this)" class="assembly-img">
+          ${a.img
+            ? `<img src="${a.img}" alt="${a.title}" loading="lazy"
+                   onerror="window.ALU.imgFail(this)" class="assembly-img">`
+            : `<div class="assembly-img assembly-img--empty"><i class="ti ti-photo"></i></div>`}
         </div>
         <div class="assembly-title">${a.title}</div>
       </div>
@@ -165,7 +283,7 @@
         <div class="products__specs-title">SPECS</div>
         <div class="products__specs-groups">
           ${specs.map(g => `
-            <div class="spec-group">
+            <div class="spec-group${g.wide ? ' spec-group--wide' : ''}">
               <div class="spec-group__label">${g.group}</div>
               <div class="spec-group__list">
                 ${g.items.map(renderSpecRow).join('')}
@@ -299,13 +417,16 @@
       card.addEventListener('click', () => openAssemblyLightbox(featured, idx));
     });
 
-    // 其他產品列：toast 提示
+    // 其他產品列：可販售 → 切換顯示；準備中 → toast
     root.querySelectorAll('.other-row').forEach(rowEl => {
       rowEl.addEventListener('click', () => {
         const id = rowEl.dataset.productId;
         const p = PRODUCTS.find(x => x.id === id);
         if (!p) return;
-        if (p.status === 'preview' || p.status === 'coming-soon') {
+        if (p.status === 'available') {
+          renderPage(root, id);
+          root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
           window.ALU.toast.show(`${p.name} 還在準備中，敬請期待！或先 LINE 諮詢`);
         }
       });
